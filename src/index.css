@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-purple-500/30 selection:text-white;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-border rounded-2xl transition-all duration-300 hover:border-border-hover hover:bg-card-hover/90;
+  }
+  
+  .glass-pill {
+    @apply bg-card/80 backdrop-blur-md border border-border rounded-full hover:border-border-hover hover:bg-card-hover/90 transition-all duration-300;
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  }
+}
