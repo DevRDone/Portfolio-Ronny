@@ -106,43 +106,6 @@ export function Hero() {
               <circle cx="0" cy="0" r="4" fill="#60A5FA" style={{ filter: "drop-shadow(0 0 8px #60A5FA)" }} />
             </motion.g>
 
-            {/* Dynamic Ascending Numbers */}
-            {[
-              { text: "+ 45.290 views", x: 100, y: 700, delayFactor: 0.31 },
-              { text: "R$ 18.940,00", x: 350, y: 480, delayFactor: 0.35 },
-              { text: "+ 289.382 views", x: 650, y: 250, delayFactor: 0.40 },
-              { text: "R$ 142.500,00", x: 1000, y: 50, delayFactor: 0.46 },
-            ].map((num, i) => (
-              <motion.g
-                key={i}
-                style={{ transformOrigin: `${num.x}px ${num.y}px` }}
-                animate={{
-                  opacity: [0, 0, 1, 0, 0],
-                  y: [0, 0, -40, -80, -80],
-                  scale: [0.5, 0.5, 1.2, 0.8, 0.8],
-                }}
-                transition={{
-                  duration,
-                  repeat: Infinity,
-                  repeatDelay: 3,
-                  times: [0, num.delayFactor, num.delayFactor + 0.03, num.delayFactor + 0.08, 1],
-                  ease: "easeOut"
-                }}
-              >
-                <text
-                  x={num.x}
-                  y={num.y}
-                  fill="#93C5FD"
-                  fontSize="36"
-                  fontFamily="monospace"
-                  fontWeight="bold"
-                  style={{ filter: "drop-shadow(0 0 15px rgba(96, 165, 250, 0.8))" }}
-                >
-                  {num.text}
-                </text>
-              </motion.g>
-            ))}
-
             <defs>
               <linearGradient id="graphGradient" x1="0" y1="1" x2="1" y2="0">
                 <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
@@ -291,24 +254,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-5xl md:text-[6.5rem] font-bold tracking-tighter uppercase leading-[0.9] text-white flex flex-col items-center font-['Orbitron'] relative"
+          className="text-5xl md:text-[6.5rem] font-bold tracking-tighter uppercase leading-[0.9] text-white flex flex-col items-center font-['Orbitron']"
           style={{ textShadow: "0 0 40px rgba(255,255,255,0.3)" }}
         >
-          {/* Chama azul queimando apenas no intervalo */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] md:w-[400px] h-[100px] md:h-[150px] bg-blue-600 rounded-[100%] pointer-events-none mix-blend-screen -z-10"
-            style={{ filter: "blur(60px)" }}
-            animate={{
-              opacity: [0, 0, 0.8, 0.4, 0.9, 0],
-              scale: [1, 1, 1.2, 0.9, 1.1, 1],
-            }}
-            transition={{
-              duration: duration + 3,
-              repeat: Infinity,
-              times: [0, 0.862, 0.866, 0.911, 0.955, 1],
-              ease: "easeInOut"
-            }}
-          />
           <span className="tracking-[0.1em] font-black">Lkz</span>
           <span className="text-2xl md:text-5xl tracking-[0.2em] font-medium lowercase mt-2 font-sans">studio</span>
         </motion.h1>
