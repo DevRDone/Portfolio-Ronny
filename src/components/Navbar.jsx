@@ -18,6 +18,7 @@ export function Navbar() {
     { name: "Serviços", href: "#servicos" },
     { name: "Projetos", href: "#projetos" },
     { name: "Processo", href: "#processo" },
+    { name: "Sob Encomenda", href: "#precos" },
     { name: "Contato", href: "#contato" },
   ];
 
