@@ -104,7 +104,7 @@ export function Hero() {
                 <Target size={16} />
               </div>
               <div className="text-left font-mono">
-                <div className="text-[10px] text-zinc-400">Pixel & Tracking Active</div>
+                <div className="text-[10px] text-zinc-300">Pixel & Tracking Active</div>
                 <div className="text-xs font-bold text-purple-300">Google & Meta Ads</div>
               </div>
             </div>
@@ -115,7 +115,7 @@ export function Hero() {
                 <DollarSign size={16} />
               </div>
               <div className="text-left font-mono">
-                <div className="text-[10px] text-zinc-400">Alta Conversão</div>
+                <div className="text-[10px] text-zinc-300">Alta Conversão</div>
                 <div className="text-xs font-bold text-green-400">R$ 497,00 Checkout Direct</div>
               </div>
             </div>
@@ -197,7 +197,7 @@ export function Hero() {
                 <Star size={12} fill="currentColor" />
                 <span className="text-[10px] text-zinc-300 font-mono ml-1">5.0 Google Reviews</span>
               </div>
-              <span className="text-zinc-600">|</span>
+              <span className="text-zinc-400">|</span>
               <div className="text-[10px] text-green-400 font-mono flex items-center gap-1">
                 <Lock size={10} /> Dominio & SSL
               </div>
@@ -315,16 +315,23 @@ export function Hero() {
         </div>
 
         {/* Scene Navigation Selector Bullets (Desktop) */}
-        <div className="hidden md:flex absolute bottom-20 left-1/2 -translate-x-1/2 items-center gap-2 z-10">
+        <div className="hidden md:flex absolute bottom-20 left-1/2 -translate-x-1/2 items-center gap-3 z-10">
           {scenesMeta.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setScene(idx)}
               aria-label={`Alternar para cena ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-500 min-w-[24px] min-h-[24px] flex items-center justify-center ${
-                scene === idx ? "w-8 bg-[#7C3AED]" : "w-2 bg-white/20 hover:bg-white/40"
-              }`}
-            />
+              className="relative w-8 h-8 flex items-center justify-center min-w-[44px] min-h-[44px]"
+            >
+              <span
+                className="absolute h-1.5 w-full rounded-full bg-white/20 transition-opacity duration-300 pointer-events-none"
+                style={{ opacity: scene === idx ? 0 : 1 }}
+              />
+              <span
+                className="absolute h-1.5 w-full rounded-full bg-[#7C3AED] transition-transform duration-300 origin-center pointer-events-none"
+                style={{ transform: scene === idx ? "scaleX(1)" : "scaleX(0.25)" }}
+              />
+            </button>
           ))}
         </div>
 

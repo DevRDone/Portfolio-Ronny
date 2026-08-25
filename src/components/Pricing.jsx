@@ -106,7 +106,7 @@ export function Pricing() {
               </div>
 
               <div className="mb-6 flex items-baseline justify-between border-b border-white/10 pb-4">
-                <span className="text-zinc-400 text-xs font-mono">ORÇAMENTO</span>
+                <span className="text-zinc-300 text-xs font-mono">ORÇAMENTO</span>
                 <span className="text-2xl font-extrabold tracking-tight text-white font-mono">
                   {plan.status}
                 </span>
@@ -171,7 +171,7 @@ export function Pricing() {
             <span className="text-2xl md:text-3xl font-black text-white font-mono block">
               Sob consulta
             </span>
-            <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
+            <span className="text-[10px] font-mono text-zinc-300 uppercase tracking-widest">
               / KOVA LABS CUSTOM
             </span>
           </div>
