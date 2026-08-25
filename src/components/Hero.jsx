@@ -19,6 +19,7 @@ import {
   MessageSquareText,
   Clock
 } from "lucide-react";
+import { KovaIcon } from "./KovaLogo";
 
 export function Hero() {
   const [scene, setScene] = useState(0);
@@ -32,34 +33,34 @@ export function Hero() {
   }, []);
 
   const scenesMeta = [
-    { glow: "from-blue-600/30 via-indigo-600/20 to-purple-600/30" },
-    { glow: "from-purple-600/30 via-pink-600/20 to-blue-600/30" },
-    { glow: "from-emerald-600/30 via-teal-600/20 to-blue-600/30" },
-    { glow: "from-amber-500/30 via-orange-600/20 to-red-600/30" }
+    { glow: "from-[#7C3AED]/40 via-indigo-600/30 to-[#EF233C]/30" },
+    { glow: "from-purple-600/30 via-[#7C3AED]/30 to-blue-600/30" },
+    { glow: "from-emerald-600/30 via-teal-600/20 to-[#7C3AED]/30" },
+    { glow: "from-[#EF233C]/40 via-orange-600/30 to-[#7C3AED]/40" }
   ];
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-6 text-center overflow-hidden bg-zinc-950"
+      className="relative min-h-screen flex flex-col items-center justify-center pt-24 px-6 text-center overflow-hidden bg-[#050507]"
       style={{ transform: "translateZ(0)" }}
     >
       {/* BACKGROUND GRAPHICS & MOTION SEQUENCE */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         
-        {/* Dynamic Background Aura Glow */}
+        {/* Dynamic Background Aura Glow in Kova Violet & Red */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`glow-${scene}`}
             initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 0.4, scale: 1.1 }}
-            exit={{ opacity: 0, scale: 1.2 }}
+            animate={{ opacity: 0.45, scale: 1.15 }}
+            exit={{ opacity: 0, scale: 1.25 }}
             transition={{ duration: 1.2 }}
-            className={`absolute w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-gradient-to-tr ${scenesMeta[scene].glow} blur-[120px] will-change-transform`}
+            className={`absolute w-[600px] h-[600px] md:w-[850px] md:h-[850px] rounded-full bg-gradient-to-tr ${scenesMeta[scene].glow} blur-[140px] will-change-transform`}
           />
         </AnimatePresence>
 
         {/* Cybernetic Matrix Grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-zinc-950/80 to-zinc-950 z-0" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#050507]/85 to-[#050507] z-0" />
         <div className="absolute inset-0 opacity-15 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
 
         {/* SCENE ENRICHED MOTIONS */}
@@ -79,13 +80,13 @@ export function Hero() {
               {[0, 1, 2].map((ring) => (
                 <div
                   key={`radar-${ring}`}
-                  className="absolute w-[300px] h-[300px] sm:w-[460px] sm:h-[460px] border border-blue-500/20 rounded-full animate-ping"
+                  className="absolute w-[300px] h-[300px] sm:w-[460px] sm:h-[460px] border border-[#7C3AED]/30 rounded-full animate-ping"
                   style={{ animationDuration: `${3 + ring * 1.5}s` }}
                 />
               ))}
 
               {/* 1. Elemento: +ROI Elevado */}
-              <div className="absolute top-28 left-4 md:top-36 md:left-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-blue-500/40 rounded-full backdrop-blur-xl">
+              <div className="absolute top-28 left-4 md:top-36 md:left-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-[#7C3AED]/40 rounded-full backdrop-blur-xl">
                 <div className="w-8 h-8 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center text-green-400">
                   <TrendingUp size={16} />
                 </div>
@@ -96,8 +97,8 @@ export function Hero() {
               </div>
 
               {/* 2. Elemento: Vendas 24/7 */}
-              <div className="absolute top-28 right-4 md:top-36 md:right-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-purple-500/40 rounded-full backdrop-blur-xl">
-                <div className="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300">
+              <div className="absolute top-28 right-4 md:top-36 md:right-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-[#EF233C]/40 rounded-full backdrop-blur-xl">
+                <div className="w-8 h-8 rounded-full bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
                   <Clock size={16} />
                 </div>
                 <div className="text-left font-mono">
@@ -107,13 +108,13 @@ export function Hero() {
               </div>
 
               {/* 3. Elemento: Meta & Google Ads */}
-              <div className="absolute bottom-28 left-4 md:bottom-36 md:left-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-indigo-500/40 rounded-full backdrop-blur-xl">
-                <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-300">
+              <div className="absolute bottom-28 left-4 md:bottom-36 md:left-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-[#7C3AED]/40 rounded-full backdrop-blur-xl">
+                <div className="w-8 h-8 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-[#7C3AED]">
                   <Target size={16} />
                 </div>
                 <div className="text-left font-mono">
                   <div className="text-[10px] text-zinc-400">Pixel & Tracking Active</div>
-                  <div className="text-xs font-bold text-indigo-300">Google & Meta Ads</div>
+                  <div className="text-xs font-bold text-purple-300">Google & Meta Ads</div>
                 </div>
               </div>
 
@@ -129,7 +130,7 @@ export function Hero() {
               </div>
 
               {/* Center Micro Floating Badge */}
-              <div className="absolute top-20 font-mono text-[10px] text-blue-300 bg-blue-500/10 border border-blue-500/30 px-3 py-1 rounded-full backdrop-blur-md">
+              <div className="absolute top-20 font-mono text-[10px] text-purple-300 bg-[#7C3AED]/15 border border-[#7C3AED]/40 px-3 py-1 rounded-full backdrop-blur-md">
                 ⚡ COPYWRITING MAGNÉTICO & AIDA
               </div>
             </motion.div>
@@ -147,18 +148,18 @@ export function Hero() {
             >
               {/* Google Search Bar Mockup Top Center */}
               <div className="absolute top-16 sm:top-20 w-[300px] sm:w-[500px] bg-black/90 border border-white/20 rounded-full px-4 py-2.5 flex items-center gap-3 backdrop-blur-xl opacity-60 shadow-xl">
-                <Search size={14} className="text-purple-400" />
+                <Search size={14} className="text-[#7C3AED]" />
                 <span className="font-mono text-xs text-zinc-300 flex-1 text-left truncate">
                   Advogados, Personal Trainers, Barbeiros & Médicos no Google...
                 </span>
-                <span className="font-mono text-[9px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30">
+                <span className="font-mono text-[9px] bg-[#7C3AED]/20 text-purple-300 px-2 py-0.5 rounded-full border border-[#7C3AED]/40">
                   TOP #1
                 </span>
               </div>
 
               {/* 1. Advogado Badge */}
-              <div className="absolute top-28 left-4 md:top-36 md:left-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-purple-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300">
+              <div className="absolute top-28 left-4 md:top-36 md:left-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-[#7C3AED]/40 rounded-2xl backdrop-blur-xl">
+                <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-purple-300">
                   <Scale size={20} />
                 </div>
                 <div className="text-left font-mono">
@@ -168,13 +169,13 @@ export function Hero() {
               </div>
 
               {/* 2. Personal Trainer Badge */}
-              <div className="absolute top-28 right-4 md:top-36 md:right-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-pink-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-pink-500/20 border border-pink-400/40 flex items-center justify-center text-pink-300">
+              <div className="absolute top-28 right-4 md:top-36 md:right-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-[#EF233C]/40 rounded-2xl backdrop-blur-xl">
+                <div className="w-10 h-10 rounded-xl bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
                   <Dumbbell size={20} />
                 </div>
                 <div className="text-left font-mono">
                   <div className="text-xs font-bold text-white">Personal Trainer</div>
-                  <div className="text-[9px] text-pink-300">Consultoria Online</div>
+                  <div className="text-[9px] text-[#EF233C]">Consultoria Online</div>
                 </div>
               </div>
 
@@ -228,11 +229,11 @@ export function Hero() {
               transition={{ duration: 0.6 }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              {/* 1 SINGLE CRM CARD IN ENTIRE LOOP */}
-              <div className="absolute left-4 md:left-[11%] w-[260px] md:w-[320px] h-[340px] md:h-[400px] opacity-40 md:opacity-60 rounded-3xl border border-emerald-500/40 bg-black/90 backdrop-blur-xl p-5 flex flex-col justify-between shadow-2xl">
+              {/* 1 SINGLE CRM CARD */}
+              <div className="absolute left-4 md:left-[11%] w-[260px] md:w-[320px] h-[340px] md:h-[400px] opacity-40 md:opacity-60 rounded-3xl border border-[#7C3AED]/40 bg-black/90 backdrop-blur-xl p-5 flex flex-col justify-between shadow-2xl">
                 <div className="flex justify-between items-center border-b border-white/10 pb-3">
-                  <span className="font-mono text-[9px] text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
-                    <BarChart3 size={10} /> CRM DE LEADS
+                  <span className="font-mono text-[9px] text-purple-300 bg-[#7C3AED]/20 px-2 py-0.5 rounded border border-[#7C3AED]/40 flex items-center gap-1">
+                    <BarChart3 size={10} /> KOVA CRM SYSTEMS
                   </span>
                   <span className="text-[9px] font-mono text-emerald-400 font-bold">100% ONLINE</span>
                 </div>
@@ -253,7 +254,7 @@ export function Hero() {
                     </div>
                   </div>
                 </div>
-                <div className="text-[9px] font-mono text-emerald-300 text-left border-t border-white/10 pt-2 flex justify-between">
+                <div className="text-[9px] font-mono text-purple-300 text-left border-t border-white/10 pt-2 flex justify-between">
                   <span>AUTOMAÇÃO DE LEADS</span>
                   <span>SUPABASE SYNC</span>
                 </div>
@@ -271,13 +272,13 @@ export function Hero() {
               </div>
 
               {/* Data Sync Node Pill Right Bottom */}
-              <div className="absolute right-4 bottom-28 md:right-[10%] md:bottom-36 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">
+              <div className="absolute right-4 bottom-28 md:right-[10%] md:bottom-36 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-[#7C3AED]/40 rounded-2xl backdrop-blur-xl">
+                <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-purple-300">
                   <MessageSquareText size={20} />
                 </div>
                 <div className="text-left font-mono">
                   <div className="text-xs font-bold text-white">Automação WhatsApp</div>
-                  <div className="text-[9px] text-emerald-300">Disparo & Webhooks API</div>
+                  <div className="text-[9px] text-purple-300">Disparo & Webhooks API</div>
                 </div>
               </div>
             </motion.div>
@@ -295,8 +296,8 @@ export function Hero() {
             >
               {/* Speed Core Ring */}
               <div className="relative flex items-center justify-center opacity-30">
-                <div className="w-[280px] h-[280px] sm:w-[440px] sm:h-[440px] rounded-full border-4 border-amber-500/30 border-t-amber-400 border-r-transparent animate-spin" style={{ animationDuration: "12s" }} />
-                <div className="absolute font-mono font-black text-6xl sm:text-8xl text-amber-400 tracking-tighter opacity-60">
+                <div className="w-[280px] h-[280px] sm:w-[440px] sm:h-[440px] rounded-full border-4 border-[#7C3AED]/30 border-t-[#7C3AED] border-r-transparent animate-spin" style={{ animationDuration: "12s" }} />
+                <div className="absolute font-mono font-black text-6xl sm:text-8xl text-purple-400 tracking-tighter opacity-60">
                   100
                 </div>
               </div>
@@ -324,13 +325,13 @@ export function Hero() {
               </div>
 
               {/* Code Engineering Pill Right */}
-              <div className="absolute right-4 bottom-28 md:right-[10%] md:bottom-40 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-orange-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-400/40 flex items-center justify-center text-orange-400">
+              <div className="absolute right-4 bottom-28 md:right-[10%] md:bottom-40 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-[#EF233C]/40 rounded-2xl backdrop-blur-xl">
+                <div className="w-10 h-10 rounded-xl bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
                   <Terminal size={20} />
                 </div>
                 <div className="text-left font-mono">
                   <div className="text-xs font-bold text-white">Clean Code & Vite</div>
-                  <div className="text-[9px] text-orange-300">0.2s Ultra Fast Render</div>
+                  <div className="text-[9px] text-[#EF233C]">0.2s Ultra Fast Render</div>
                 </div>
               </div>
             </motion.div>
@@ -339,14 +340,14 @@ export function Hero() {
         </AnimatePresence>
 
         {/* Scene Navigation Selector Bullets */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
           {scenesMeta.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setScene(idx)}
               aria-label={`Alternar para cena ${idx + 1}`}
               className={`h-2 rounded-full transition-all duration-500 min-w-[24px] min-h-[24px] flex items-center justify-center ${
-                scene === idx ? "w-8 bg-white" : "w-2 bg-white/20 hover:bg-white/40"
+                scene === idx ? "w-8 bg-[#7C3AED]" : "w-2 bg-white/20 hover:bg-white/40"
               }`}
             />
           ))}
@@ -354,33 +355,43 @@ export function Hero() {
 
       </div>
 
-      {/* ORIGINAL HERO FRONT CONTENT */}
+      {/* HERO MAIN BRAND & LOGO SECTION */}
       <div className="relative z-10 flex flex-col items-center">
+        
+        {/* Official Kova Logo Icon Main Display */}
+        <div className="mb-4">
+          <KovaIcon className="w-16 h-16 md:w-24 md:h-24" glow={true} useImg={true} />
+        </div>
+
+        {/* STACKED TITLE: Kova / LABS */}
         <h1
           className="text-5xl md:text-[6.5rem] font-bold tracking-tighter uppercase leading-[0.9] text-white flex flex-col items-center font-['Orbitron']"
-          style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}
+          style={{ textShadow: "0 0 35px rgba(124,58,237,0.3)" }}
         >
-          <span className="tracking-[0.1em] font-black">Lkz</span>
-          <span className="text-2xl md:text-5xl tracking-[0.2em] font-medium lowercase mt-2 font-sans text-purple-400">studio</span>
+          <span className="tracking-[0.1em] font-black">Kova</span>
+          <span className="text-2xl md:text-5xl tracking-[0.25em] font-medium uppercase mt-2 font-sans text-[#7C3AED]">LABS</span>
         </h1>
 
+        {/* RESTORED EXACT COPY AND FONT */}
         <div className="mt-10 flex flex-col items-center">
-          <p className="font-mono text-[10px] md:text-xs tracking-[0.25em] uppercase text-zinc-300 mb-2 whitespace-pre-line text-center">
+          <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase text-zinc-400 mb-2 whitespace-pre-line text-center">
             {`SITES DE ALTA CONVERSÃO - PERFORMANCE - UX\nTRANSFORMANDO TRÁFEGO EM AUTORIDADE E FATURAMENTO !`}
           </p>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+        {/* CTA Action Buttons */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <a
             href="#contato"
-            aria-label="Escalar seu negócio com LKZ Studio"
-            className="w-full sm:w-48 h-14 flex justify-center items-center bg-white text-black font-bold text-sm uppercase tracking-widest hover:bg-zinc-200 transition-colors rounded-xl min-h-[44px]"
+            aria-label="Escalar seu negócio com Kova Labs"
+            className="w-full sm:w-48 h-14 flex justify-center items-center bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold text-sm uppercase tracking-widest transition-colors relative overflow-hidden group rounded-xl min-h-[44px] shadow-[0_0_25px_rgba(124,58,237,0.4)]"
           >
+            <span className="absolute inset-0 w-full h-full bg-white/20 blur-md group-hover:scale-150 transition-transform duration-500" />
             ESCALAR
           </a>
           <a
             href="#projetos"
-            aria-label="Ver cases de sucesso do portfólio"
+            aria-label="Ver cases de sucesso do portfólio Kova Labs"
             className="w-full sm:w-48 h-14 flex justify-center items-center border border-white/30 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/10 transition-colors rounded-xl min-h-[44px]"
           >
             VER CASES
@@ -389,7 +400,7 @@ export function Hero() {
       </div>
 
       <div className="absolute bottom-8 flex flex-col items-center gap-3 z-10">
-        <div className="w-[1px] h-8 bg-gradient-to-b from-transparent via-white/60 to-white/40 animate-pulse" />
+        <div className="w-[1px] h-10 bg-gradient-to-b from-transparent via-[#7C3AED] to-white/40 animate-pulse" />
         <span className="font-mono text-[9px] tracking-widest uppercase opacity-60">Scroll para explorar</span>
       </div>
     </section>

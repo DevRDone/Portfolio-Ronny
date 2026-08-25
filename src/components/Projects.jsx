@@ -44,7 +44,7 @@ const projects = [
     image: protocoloImg,
     link: "https://protocolofive.netlify.app",
     badge: "Otimizado para Ads",
-    badgeColor: "border-purple-500/40 text-purple-400 bg-purple-500/10",
+    badgeColor: "border-[#7C3AED]/40 text-[#7C3AED] bg-[#7C3AED]/10",
     objectFit: "object-cover object-top"
   },
   {
@@ -91,21 +91,21 @@ export function Projects() {
     : projects.filter(p => p.category === activeFilter);
 
   return (
-    <section id="projetos" className="py-24 px-6 max-w-7xl mx-auto">
+    <section id="projetos" className="py-24 px-6 max-w-7xl mx-auto bg-[#050507]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="mb-12"
       >
-        <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-3 flex items-center gap-2">
-          <Sparkles size={14} className="text-purple-400" /> CASES REAIS & PROJETOS
+        <span className="font-mono text-xs uppercase tracking-widest text-[#7C3AED] mb-3 flex items-center gap-2 font-bold">
+          <Sparkles size={14} className="text-[#7C3AED]" /> CASES REAIS KOVA LABS
         </span>
         <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 font-['Orbitron']">
           Trabalhos em Destaque
         </h2>
         <p className="text-zinc-300 max-w-xl">
-          Conheça o portfólio de landing pages de alta conversão, sites institucionais e sistemas CRM customizados.
+          Conheça os projetos de landing pages de alta conversão, sites institucionais e sistemas CRM desenvolvidos pela Kova Labs.
         </p>
       </motion.div>
 
@@ -120,7 +120,7 @@ export function Projects() {
             role="tab"
             className={`px-4 py-2.5 rounded-full font-mono text-xs transition-all duration-300 flex items-center gap-2 min-h-[44px] ${
               activeFilter === cat.key
-                ? "bg-white text-black font-bold shadow-lg"
+                ? "bg-[#7C3AED] text-white font-bold shadow-[0_0_20px_rgba(124,58,237,0.4)]"
                 : "bg-white/5 border border-white/10 text-zinc-300 hover:text-white hover:bg-white/10"
             }`}
           >
@@ -148,7 +148,7 @@ export function Projects() {
               >
                 {/* Project Image Box */}
                 <div
-                  className={`w-full md:w-3/5 overflow-hidden rounded-2xl glass-card p-2 relative aspect-[16/10] border border-white/10 group-hover:border-white/30 transition-colors flex items-center justify-center bg-black/60 ${
+                  className={`w-full md:w-3/5 overflow-hidden rounded-2xl p-2 relative aspect-[16/10] border border-white/10 group-hover:border-[#7C3AED]/40 transition-all duration-300 flex items-center justify-center bg-black/60 ${
                     hasLink ? "cursor-pointer" : "cursor-default"
                   }`}
                   onClick={() => {
@@ -176,17 +176,17 @@ export function Projects() {
                   
                   {hasLink && (
                     <div 
-                      className="absolute top-4 right-4 z-20 w-12 h-12 bg-black/70 backdrop-blur-md border border-white/30 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110"
+                      className="absolute top-4 right-4 z-20 w-12 h-12 bg-black/70 backdrop-blur-md border border-[#7C3AED]/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 shadow-lg"
                       aria-label={`Ver projeto ${project.title}`}
                     >
-                      <ArrowUpRight className="text-white" size={22} />
+                      <ArrowUpRight className="text-[#7C3AED]" size={22} />
                     </div>
                   )}
                 </div>
                 
                 {/* Text Content */}
                 <div className="w-full md:w-2/5 flex flex-col gap-4 text-left">
-                  <span className="text-xs font-mono text-purple-400 uppercase tracking-widest">
+                  <span className="text-xs font-mono text-[#7C3AED] uppercase tracking-widest font-bold">
                     {project.categoryLabel}
                   </span>
                   
@@ -212,7 +212,7 @@ export function Projects() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Visitar o projeto ${project.title} ao vivo em nova aba`}
-                      className="mt-3 inline-flex items-center gap-2 text-xs font-mono font-bold text-white uppercase tracking-wider bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-3 rounded-xl w-fit transition-all duration-300 group/btn min-h-[44px]"
+                      className="mt-3 inline-flex items-center gap-2 text-xs font-mono font-bold text-white uppercase tracking-wider bg-[#7C3AED] hover:bg-[#6D28D9] px-5 py-3.5 rounded-xl w-fit transition-all duration-300 group/btn min-h-[44px] shadow-[0_0_20px_rgba(124,58,237,0.3)]"
                     >
                       <span>VISITAR PROJETO AO VIVO</span>
                       <ExternalLink size={14} className="group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />

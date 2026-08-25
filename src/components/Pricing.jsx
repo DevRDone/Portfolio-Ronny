@@ -9,14 +9,14 @@ const plans = [
     subtitle: "Páginas de alta performance para infoprodutos, serviços e ofertas diretas com foco total em conversão.",
     recommended: false,
     features: [
-      "Copywriting & estrutura magnética",
-      "Design exclusivo e 100% responsivo",
-      "Otimização de velocidade extrema",
-      "Integração com WhatsApp e checkout"
+      "Copywriting & estrutura magnética AIDA",
+      "Design exclusivo Kova Labs 100% responsivo",
+      "Otimização de velocidade extrema (100/100)",
+      "Integração com WhatsApp e checkout direct"
     ],
-    whatsappMsg: "Olá! Gostaria de solicitar um orçamento para uma Página de Vendas.",
+    whatsappMsg: "Olá! Gostaria de solicitar um orçamento com a Kova Labs para uma Página de Vendas.",
     cta: "SOLICITAR NO WHATSAPP",
-    variant: "white"
+    variant: "violet"
   },
   {
     tag: "PROFISSIONAIS & EMPRESAS",
@@ -28,12 +28,12 @@ const plans = [
     features: [
       "Apresentação premium da sua marca",
       "Seções customizadas de serviços & portfólio",
-      "Otimização SEO para aparecer no Google",
-      "Botões diretos de contato e agendamento"
+      "Otimização SEO para TOP #1 no Google",
+      "Botões diretos de contato e agendamento VIP"
     ],
-    whatsappMsg: "Olá! Gostaria de solicitar um orçamento para um Site Institucional.",
+    whatsappMsg: "Olá! Gostaria de solicitar um orçamento com a Kova Labs para um Site Institucional.",
     cta: "SOLICITAR NO WHATSAPP",
-    variant: "white"
+    variant: "violet"
   },
   {
     tag: "SISTEMAS & AUTOMAÇÕES",
@@ -42,12 +42,12 @@ const plans = [
     subtitle: "Sistemas web e CRMs sob medida para gerenciar seus clientes, leads, funis e automatizar os processos do seu negócio.",
     recommended: false,
     features: [
-      "Painel de controle / Dashboard interativo",
+      "Painel de controle / Dashboard em tempo real",
       "Gestão de leads, etapas e funil de vendas",
-      "Autenticação de usuários & banco de dados",
-      "Fluxos operacionais customizados"
+      "Autenticação de usuários & Supabase / Postgres",
+      "Fluxos operacionais & Webhooks WhatsApp"
     ],
-    whatsappMsg: "Olá! Gostaria de solicitar um orçamento para um CRM ou Sistema Web personalizado.",
+    whatsappMsg: "Olá! Gostaria de solicitar um orçamento com a Kova Labs para um CRM ou Sistema Web personalizado.",
     cta: "FALAR COM ESPECIALISTA",
     variant: "outline"
   }
@@ -57,21 +57,21 @@ export function Pricing() {
   const whatsappBase = "https://wa.me/5585996590156";
 
   return (
-    <section id="precos" className="py-24 px-6 max-w-7xl mx-auto relative">
+    <section id="precos" className="py-24 px-6 max-w-7xl mx-auto relative bg-[#050507]">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-4 block">
-          Investimento
+        <span className="font-mono text-xs uppercase tracking-widest text-[#7C3AED] mb-4 block font-bold">
+          Investimento & Formatos
         </span>
         <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 uppercase font-['Orbitron']">
           Projetos Sob Encomenda
         </h2>
         <p className="text-zinc-300 max-w-2xl mx-auto text-base md:text-lg">
-          Desenvolvemos soluções 100% personalizadas sob medida para o seu modelo de negócio. Escolha o formato ideal para o seu momento.
+          Desenvolvemos soluções 100% personalizadas sob medida na Kova Labs. Escolha o formato ideal para o seu momento.
         </p>
       </motion.div>
 
@@ -84,18 +84,18 @@ export function Pricing() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
-            className={`relative bg-zinc-950/90 border ${
-              plan.recommended ? "border-white" : "border-white/15"
-            } p-8 rounded-2xl flex flex-col justify-between group hover:border-white/40 transition-all duration-300`}
+            className={`relative bg-[#121216] border ${
+              plan.recommended ? "border-[#7C3AED] shadow-[0_0_30px_rgba(124,58,237,0.2)]" : "border-white/10"
+            } p-8 rounded-2xl flex flex-col justify-between group hover:border-[#7C3AED]/60 transition-all duration-300`}
           >
             {plan.recommended && (
-              <div className="absolute -top-3 right-6 bg-white text-black font-mono text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-sm shadow-md">
+              <div className="absolute -top-3 right-6 bg-[#7C3AED] text-white font-mono text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
                 {plan.badgeText}
               </div>
             )}
 
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-wider text-purple-400 mb-2">
+              <div className="font-mono text-[11px] uppercase tracking-wider text-[#7C3AED] mb-2 font-bold">
                 {plan.tag}
               </div>
 
@@ -106,7 +106,7 @@ export function Pricing() {
               </div>
 
               <div className="mb-6 flex items-baseline justify-between border-b border-white/10 pb-4">
-                <span className="text-zinc-400 text-xs font-mono">VALOR DO PROJETO</span>
+                <span className="text-zinc-400 text-xs font-mono">ORÇAMENTO</span>
                 <span className="text-2xl font-extrabold tracking-tight text-white font-mono">
                   {plan.status}
                 </span>
@@ -119,7 +119,7 @@ export function Pricing() {
               <ul className="space-y-3 mb-8">
                 {plan.features.map((feature, fIdx) => (
                   <li key={fIdx} className="flex items-center gap-3 text-xs md:text-sm text-zinc-200">
-                    <span className="w-4 h-4 rounded-full bg-white/10 border border-white/20 flex items-center justify-center flex-shrink-0 text-white">
+                    <span className="w-4 h-4 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center flex-shrink-0 text-[#7C3AED]">
                       <Check size={10} />
                     </span>
                     <span>{feature}</span>
@@ -132,11 +132,11 @@ export function Pricing() {
               href={`${whatsappBase}?text=${encodeURIComponent(plan.whatsappMsg)}`}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Solicitar orçamento de ${plan.title} no WhatsApp`}
+              aria-label={`Solicitar orçamento de ${plan.title} na Kova Labs pelo WhatsApp`}
               className={`w-full py-4 text-center font-bold tracking-widest text-xs uppercase transition-all duration-300 flex items-center justify-center gap-2 rounded-xl min-h-[44px] ${
-                plan.variant === "white"
-                  ? "bg-white text-black hover:bg-zinc-200 shadow-md"
-                  : "bg-transparent text-white border border-white/30 hover:bg-white hover:text-black"
+                plan.recommended
+                  ? "bg-[#7C3AED] hover:bg-[#6D28D9] text-white shadow-[0_0_20px_rgba(124,58,237,0.4)]"
+                  : "bg-white/10 hover:bg-white/20 text-white border border-white/20"
               }`}
             >
               <MessageCircle size={16} />
@@ -152,17 +152,17 @@ export function Pricing() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.4 }}
-        className="bg-zinc-950/90 border border-white/20 p-8 md:p-10 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden"
+        className="bg-[#121216] border border-white/15 p-8 md:p-10 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden"
       >
         <div className="max-w-2xl">
-          <div className="font-mono text-[11px] uppercase tracking-wider text-purple-400 mb-2">
+          <div className="font-mono text-[11px] uppercase tracking-wider text-[#EF233C] mb-2 font-bold">
             PROJETOS ESPECIAIS & DEMANDAS SOB ENCOMENDA
           </div>
           <h3 className="text-2xl md:text-3xl font-bold tracking-tight text-white mb-3 font-['Orbitron']">
             Precisa de um projeto exclusivo ou integração personalizada?
           </h3>
-          <p className="text-zinc-300 text-sm md:text-base">
-            Seja para advogados, personal trainers, barbeiros, clínicas ou empresas com demandas específicas de CRM e automações, desenvolvemos a solução ideal sob consulta.
+          <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
+            Seja para advogados, personal trainers, barbeiros, clínicas ou empresas com demandas específicas de CRM e automações, a Kova Labs desenvolve a solução ideal sob medida.
           </p>
         </div>
 
@@ -172,16 +172,16 @@ export function Pricing() {
               Sob consulta
             </span>
             <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">
-              / PROJETO PERSONALIZADO
+              / KOVA LABS CUSTOM
             </span>
           </div>
 
           <a
-            href={`${whatsappBase}?text=${encodeURIComponent("Olá! Gostaria de solicitar um orçamento para um projeto especial sob encomenda.")}`}
+            href={`${whatsappBase}?text=${encodeURIComponent("Olá Kova Labs! Gostaria de solicitar um orçamento para um projeto especial sob encomenda.")}`}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Solicitar orçamento para projeto personalizado no WhatsApp"
-            className="w-full md:w-auto px-8 py-4 bg-white text-black font-bold text-xs uppercase tracking-widest rounded-xl hover:bg-zinc-200 transition-all duration-300 flex items-center justify-center gap-2 min-h-[44px]"
+            aria-label="Solicitar orçamento para projeto personalizado na Kova Labs pelo WhatsApp"
+            className="w-full md:w-auto px-8 py-4 bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center justify-center gap-2 min-h-[44px] shadow-[0_0_20px_rgba(124,58,237,0.4)]"
           >
             <MessageCircle size={16} />
             SOLICITAR NO WHATSAPP

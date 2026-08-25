@@ -1,78 +1,129 @@
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Mail, Globe } from "lucide-react";
+import { KovaLogo } from "./KovaLogo";
+
+function InstagramIcon({ size = 18 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+    </svg>
+  );
+}
 
 export function Footer() {
+  const whatsappUrl = "https://wa.me/5585996590156?text=" + encodeURIComponent("Olá! Gostaria de conversar com a Kova Labs sobre um projeto de alta performance.");
+
   return (
-    <footer id="contato" className="relative pt-32 pb-12 px-6 overflow-hidden bg-zinc-950">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-purple-900/10 pointer-events-none" />
+    <footer id="contato" className="relative pt-28 pb-12 px-6 overflow-hidden bg-[#050507] border-t border-white/10">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#7C3AED]/5 to-[#7C3AED]/10 pointer-events-none" />
       
       <div className="max-w-7xl mx-auto relative z-10 flex flex-col items-center text-center">
+        
+        {/* Main CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12"
+          className="mb-16 flex flex-col items-center"
         >
-          <h2 className="text-4xl md:text-7xl font-bold tracking-tighter mb-6 font-['Orbitron']">
-            Vamos construir algo<br />incrível juntos?
+          <div className="mb-6">
+            <KovaLogo size="lg" />
+          </div>
+
+          <h2 className="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6 font-['Orbitron'] max-w-3xl leading-tight">
+            Criamos experiências digitais de <span className="text-[#EF233C]">alta performance</span>
           </h2>
-          <p className="text-lg md:text-xl text-zinc-300 max-w-2xl mx-auto mb-10">
-            Destaque sua marca com uma presença digital premium e de alta conversão.
+          
+          <p className="text-base sm:text-lg text-zinc-300 max-w-xl mx-auto mb-10 font-sans">
+            Transformamos ideias em resultados reais. Destaque sua marca com landing pages, sistemas web e automações sob medida.
           </p>
+
           <a
-            href="https://wa.me/5585996590156"
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Falar com Ronny no WhatsApp"
-            className="inline-flex items-center gap-3 px-10 py-5 bg-white text-black font-bold rounded-full text-lg hover:bg-zinc-200 hover:scale-105 transition-all duration-300 shadow-lg min-h-[44px]"
+            aria-label="Falar com Ronny, Founder & CEO da Kova Labs no WhatsApp"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-[#7C3AED] hover:bg-[#6D28D9] text-white font-bold rounded-xl text-base md:text-lg transition-all duration-300 shadow-[0_0_30px_rgba(124,58,237,0.4)] min-h-[44px]"
           >
-            <MessageCircle />
-            Falar com Ronny
+            <MessageCircle size={22} />
+            Falar com Ronny — Founder & CEO
           </a>
         </motion.div>
 
-        <div className="w-full h-px bg-white/10 my-12" />
-
-        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="text-2xl font-bold tracking-tighter flex items-center gap-2 font-['Orbitron']">
-            LKZ Studio
-            <span className="w-2 h-2 rounded-full bg-purple-500" />
-          </div>
-          
-          <div className="text-zinc-400 text-sm font-mono">
-            © {new Date().getFullYear()} LKZ Studio. Todos os direitos reservados.
+        {/* Business Card Info Grid */}
+        <div className="w-full grid grid-cols-1 md:grid-cols-3 gap-6 p-8 rounded-2xl bg-[#121216] border border-white/10 text-left mb-16">
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-[#7C3AED]">
+              <Mail size={18} />
+            </div>
+            <div>
+              <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">E-mail Comercial</div>
+              <a href="mailto:hello@kovalabs.com" className="text-sm font-bold text-white hover:text-[#7C3AED] transition-colors font-mono">
+                hello@kovalabs.com
+              </a>
+            </div>
           </div>
 
           <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
+              <Globe size={18} />
+            </div>
+            <div>
+              <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Domínio Oficial</div>
+              <a href="https://kovalabs.com" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white hover:text-[#EF233C] transition-colors font-mono">
+                kovalabs.com
+              </a>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300">
+              <InstagramIcon size={18} />
+            </div>
+            <div>
+              <div className="text-[10px] font-mono text-zinc-400 uppercase tracking-widest">Instagram Oficial</div>
+              <a href="https://instagram.com/kovalabss" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white hover:text-purple-300 transition-colors font-mono">
+                @kovalabss
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="w-full h-px bg-white/10 mb-8" />
+
+        {/* Footer Bottom Line */}
+        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <KovaLogo size="sm" />
+            <span className="text-xs text-zinc-400 font-mono">| Ronny — Founder & CEO</span>
+          </div>
+          
+          <div className="text-zinc-400 text-xs font-mono">
+            © {new Date().getFullYear()} Kova Labs. Todos os direitos reservados.
+          </div>
+
+          <div className="flex items-center gap-3">
             <a 
-              href="https://github.com" 
+              href="https://instagram.com/kovalabss" 
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Acessar o GitHub do estúdio" 
-              className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition-colors min-w-[44px] min-h-[44px]"
+              aria-label="Instagram da Kova Labs" 
+              className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white hover:bg-[#7C3AED]/30 transition-colors min-w-[44px] min-h-[44px]"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              <InstagramIcon size={18} />
             </a>
             <a 
-              href="https://linkedin.com" 
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Acessar o LinkedIn do estúdio" 
-              className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition-colors min-w-[44px] min-h-[44px]"
+              href="mailto:hello@kovalabs.com" 
+              aria-label="E-mail da Kova Labs" 
+              className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white hover:bg-[#7C3AED]/30 transition-colors min-w-[44px] min-h-[44px]"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-            <a 
-              href="https://instagram.com" 
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Acessar o Instagram do estúdio" 
-              className="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition-colors min-w-[44px] min-h-[44px]"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              <Mail size={18} />
             </a>
           </div>
         </div>
+
       </div>
     </footer>
   );

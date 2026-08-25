@@ -7,16 +7,25 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#050505",
-        foreground: "#ffffff",
-        card: "#111111",
-        "card-hover": "#161616",
-        border: "rgba(255, 255, 255, 0.05)",
-        "border-hover": "rgba(255, 255, 255, 0.15)",
+        background: "#050507",
+        foreground: "#F5F5F7",
+        card: "#121216",
+        "card-hover": "#1a1a22",
+        border: "rgba(255, 255, 255, 0.08)",
+        "border-hover": "rgba(124, 58, 237, 0.4)",
+        kova: {
+          violet: "#7C3AED",
+          "violet-glow": "#8B5CF6",
+          red: "#EF233C",
+          dark: "#050507",
+          card: "#121216",
+          white: "#F5F5F7"
+        }
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Plus Jakarta Sans", "Inter", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
+        brand: ["Orbitron", "Satoshi", "sans-serif"]
       },
       animation: {
         "fade-up": "fadeUp 0.8s ease-out forwards",
