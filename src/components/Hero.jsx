@@ -1,7 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { 
-  Zap, 
   ShieldCheck, 
   TrendingUp, 
   Activity, 
@@ -12,30 +11,17 @@ import {
   Cpu, 
   Search,
   BarChart3,
-  Database,
-  Terminal,
   Target,
   DollarSign,
-  Award,
-  Globe2,
-  Lock,
   Star,
-  Layers,
+  Lock,
+  Terminal,
   MessageSquareText,
   Clock
 } from "lucide-react";
 
 export function Hero() {
   const [scene, setScene] = useState(0);
-  const [isMobile, setIsMobile] = useState(
-    typeof window !== "undefined" ? window.innerWidth < 768 : false
-  );
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   // "Video Loop" automático trocando de cena a cada 6 segundos
   useEffect(() => {
@@ -46,84 +32,60 @@ export function Hero() {
   }, []);
 
   const scenesMeta = [
-    {
-      glow: "from-blue-600/40 via-indigo-600/30 to-purple-600/40"
-    },
-    {
-      glow: "from-purple-600/40 via-pink-600/30 to-blue-600/40"
-    },
-    {
-      glow: "from-emerald-600/40 via-teal-600/30 to-blue-600/40"
-    },
-    {
-      glow: "from-amber-500/40 via-orange-600/30 to-red-600/40"
-    }
+    { glow: "from-blue-600/30 via-indigo-600/20 to-purple-600/30" },
+    { glow: "from-purple-600/30 via-pink-600/20 to-blue-600/30" },
+    { glow: "from-emerald-600/30 via-teal-600/20 to-blue-600/30" },
+    { glow: "from-amber-500/30 via-orange-600/20 to-red-600/30" }
   ];
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-6 text-center overflow-hidden bg-background"
-      style={{ perspective: "1200px" }}
+      className="relative min-h-screen flex flex-col items-center justify-center pt-20 px-6 text-center overflow-hidden bg-zinc-950"
+      style={{ transform: "translateZ(0)" }}
     >
-
-      {/* BACKGROUND GRAPHICS & MOTION SEQUENCE (Behind Hero Content) */}
+      {/* BACKGROUND GRAPHICS & MOTION SEQUENCE */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         
         {/* Dynamic Background Aura Glow */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`glow-${scene}`}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 0.45, scale: 1.25 }}
-            exit={{ opacity: 0, scale: 1.4 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className={`absolute w-[650px] h-[650px] md:w-[900px] md:h-[900px] rounded-full bg-gradient-to-tr ${scenesMeta[scene].glow} blur-[150px]`}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 0.4, scale: 1.1 }}
+            exit={{ opacity: 0, scale: 1.2 }}
+            transition={{ duration: 1.2 }}
+            className={`absolute w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-gradient-to-tr ${scenesMeta[scene].glow} blur-[120px] will-change-transform`}
           />
         </AnimatePresence>
 
         {/* Cybernetic Matrix Grid */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-background/85 to-background z-0" />
-        <div className="absolute inset-0 opacity-20 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-zinc-950/80 to-zinc-950 z-0" />
+        <div className="absolute inset-0 opacity-15 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
 
-        {/* SCENE ENRICHED MOTIONS & RICH HUD ELEMENTS */}
+        {/* SCENE ENRICHED MOTIONS */}
         <AnimatePresence mode="wait">
           
-          {/* CENA 1: LANDING PAGES / PÁGINAS DE VENDAS (+ROI, ADS, COPYWRITING, PIXEL, VENDAS 24/7) */}
+          {/* CENA 1: LANDING PAGES / PÁGINAS DE VENDAS */}
           {scene === 0 && (
             <motion.div
               key="scene-0"
-              initial={{ opacity: 0, scale: 0.85 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.15 }}
-              transition={{ duration: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.6 }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              {/* Concentric Radar Waves */}
-              {[0, 1, 2, 3].map((ring) => (
-                <motion.div
+              {/* Radar Waves */}
+              {[0, 1, 2].map((ring) => (
+                <div
                   key={`radar-${ring}`}
-                  animate={{
-                    scale: [0.6 + ring * 0.3, 1.8 + ring * 0.4],
-                    opacity: [0.6, 0]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    delay: ring * 0.9,
-                    ease: "easeOut"
-                  }}
-                  className="absolute w-[280px] h-[280px] sm:w-[480px] sm:h-[480px] border border-blue-500/30 rounded-full"
+                  className="absolute w-[300px] h-[300px] sm:w-[460px] sm:h-[460px] border border-blue-500/20 rounded-full animate-ping"
+                  style={{ animationDuration: `${3 + ring * 1.5}s` }}
                 />
               ))}
 
-              {/* 1. Elemento: +ROI Elevado (Top Left) */}
-              <motion.div
-                animate={{ y: [-10, 10, -10], x: [-5, 5, -5] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "top-32 left-3 opacity-30" : "top-36 left-[10%] opacity-70"
-                } flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-blue-500/40 rounded-full backdrop-blur-xl shadow-[0_0_30px_rgba(59,130,246,0.3)]`}
-              >
+              {/* 1. Elemento: +ROI Elevado */}
+              <div className="absolute top-28 left-4 md:top-36 md:left-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-blue-500/40 rounded-full backdrop-blur-xl">
                 <div className="w-8 h-8 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center text-green-400">
                   <TrendingUp size={16} />
                 </div>
@@ -131,16 +93,10 @@ export function Hero() {
                   <div className="text-[10px] text-zinc-400">Retorno de Investimento</div>
                   <div className="text-xs font-bold text-green-400">+ROI Elevado (ADS)</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* 2. Elemento: Vendas 24/7 (Top Right) */}
-              <motion.div
-                animate={{ y: [8, -8, 8], x: [5, -5, 5] }}
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "top-32 right-3 opacity-30" : "top-36 right-[10%] opacity-70"
-                } flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-purple-500/40 rounded-full backdrop-blur-xl shadow-[0_0_30px_rgba(168,85,247,0.3)]`}
-              >
+              {/* 2. Elemento: Vendas 24/7 */}
+              <div className="absolute top-28 right-4 md:top-36 md:right-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-purple-500/40 rounded-full backdrop-blur-xl">
                 <div className="w-8 h-8 rounded-full bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300">
                   <Clock size={16} />
                 </div>
@@ -148,16 +104,10 @@ export function Hero() {
                   <div className="text-[10px] text-zinc-400">Funil Automático</div>
                   <div className="text-xs font-bold text-white">Vendas 24H Por Dia</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* 3. Elemento: Meta Ads & Google Ads Pixel Active (Bottom Left) */}
-              <motion.div
-                animate={{ y: [10, -10, 10], x: [-5, 5, -5] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "bottom-32 left-3 opacity-30" : "bottom-36 left-[10%] opacity-70"
-                } flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-indigo-500/40 rounded-full backdrop-blur-xl shadow-[0_0_30px_rgba(99,102,241,0.3)]`}
-              >
+              {/* 3. Elemento: Meta & Google Ads */}
+              <div className="absolute bottom-28 left-4 md:bottom-36 md:left-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-indigo-500/40 rounded-full backdrop-blur-xl">
                 <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-300">
                   <Target size={16} />
                 </div>
@@ -165,16 +115,10 @@ export function Hero() {
                   <div className="text-[10px] text-zinc-400">Pixel & Tracking Active</div>
                   <div className="text-xs font-bold text-indigo-300">Google & Meta Ads</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* 4. Elemento: Direct Checkout & Conversion (Bottom Right) */}
-              <motion.div
-                animate={{ y: [-8, 8, -8], x: [5, -5, 5] }}
-                transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "bottom-32 right-3 opacity-30" : "bottom-36 right-[10%] opacity-70"
-                } flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-emerald-500/40 rounded-full backdrop-blur-xl shadow-[0_0_30px_rgba(16,185,129,0.3)]`}
-              >
+              {/* 4. Elemento: Direct Checkout */}
+              <div className="absolute bottom-28 right-4 md:bottom-36 md:right-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-emerald-500/40 rounded-full backdrop-blur-xl">
                 <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
                   <DollarSign size={16} />
                 </div>
@@ -182,48 +126,27 @@ export function Hero() {
                   <div className="text-[10px] text-zinc-400">Alta Conversão</div>
                   <div className="text-xs font-bold text-green-400">R$ 497,00 Checkout Direct</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* Center Micro Floating Badge: Copywriting Magnético */}
-              <motion.div
-                animate={{ scale: [0.95, 1.05, 0.95] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-20 font-mono text-[10px] text-blue-300 bg-blue-500/10 border border-blue-500/30 px-3 py-1 rounded-full backdrop-blur-md"
-              >
+              {/* Center Micro Floating Badge */}
+              <div className="absolute top-20 font-mono text-[10px] text-blue-300 bg-blue-500/10 border border-blue-500/30 px-3 py-1 rounded-full backdrop-blur-md">
                 ⚡ COPYWRITING MAGNÉTICO & AIDA
-              </motion.div>
+              </div>
             </motion.div>
           )}
 
-          {/* CENA 2: SITES INSTITUCIONAIS (ADVOGADOS, PERSONAIS, BARBEIROS, MÉDICOS + GOOGLE 5.0 ⭐, SSL, SEO #1) */}
+          {/* CENA 2: SITES INSTITUCIONAIS */}
           {scene === 1 && (
             <motion.div
               key="scene-1"
-              initial={{ opacity: 0, scale: 0.85 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.15 }}
-              transition={{ duration: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.6 }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              {/* Rotating Orbital Rings */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute w-[360px] h-[360px] sm:w-[560px] sm:h-[560px] rounded-full border border-purple-500/20 border-dashed"
-              />
-              
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-                className="absolute w-[280px] h-[280px] sm:w-[440px] sm:h-[440px] rounded-full border border-pink-500/20"
-              />
-
               {/* Google Search Bar Mockup Top Center */}
-              <motion.div
-                animate={{ y: [-5, 5, -5] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-16 sm:top-20 w-[300px] sm:w-[520px] bg-black/90 border border-white/20 rounded-full px-4 py-2.5 flex items-center gap-3 backdrop-blur-xl opacity-50 shadow-xl"
-              >
+              <div className="absolute top-16 sm:top-20 w-[300px] sm:w-[500px] bg-black/90 border border-white/20 rounded-full px-4 py-2.5 flex items-center gap-3 backdrop-blur-xl opacity-60 shadow-xl">
                 <Search size={14} className="text-purple-400" />
                 <span className="font-mono text-xs text-zinc-300 flex-1 text-left truncate">
                   Advogados, Personal Trainers, Barbeiros & Médicos no Google...
@@ -231,18 +154,10 @@ export function Hero() {
                 <span className="font-mono text-[9px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30">
                   TOP #1
                 </span>
-              </motion.div>
+              </div>
 
-              {/* 4 Professional Niche Badges */}
-              
-              {/* 1. Advogado Badge (Top Left) */}
-              <motion.div
-                animate={{ y: [-8, 8, -8] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "top-32 left-3 opacity-30" : "top-36 left-[12%] opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-purple-500/40 rounded-2xl backdrop-blur-xl shadow-2xl`}
-              >
+              {/* 1. Advogado Badge */}
+              <div className="absolute top-28 left-4 md:top-36 md:left-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-purple-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300">
                   <Scale size={20} />
                 </div>
@@ -250,16 +165,10 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">Advocacia & Direito</div>
                   <div className="text-[9px] text-purple-300">Prestígio & Contratos</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* 2. Personal Trainer Badge (Top Right) */}
-              <motion.div
-                animate={{ y: [8, -8, 8] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "top-32 right-3 opacity-30" : "top-36 right-[12%] opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-pink-500/40 rounded-2xl backdrop-blur-xl shadow-2xl`}
-              >
+              {/* 2. Personal Trainer Badge */}
+              <div className="absolute top-28 right-4 md:top-36 md:right-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-pink-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-pink-500/20 border border-pink-400/40 flex items-center justify-center text-pink-300">
                   <Dumbbell size={20} />
                 </div>
@@ -267,16 +176,10 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">Personal Trainer</div>
                   <div className="text-[9px] text-pink-300">Consultoria Online</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* 3. Barbeiro / Studio Badge (Bottom Left) */}
-              <motion.div
-                animate={{ y: [8, -8, 8] }}
-                transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "bottom-32 left-3 opacity-30" : "bottom-36 left-[12%] opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-blue-500/40 rounded-2xl backdrop-blur-xl shadow-2xl`}
-              >
+              {/* 3. Barbeiro Badge */}
+              <div className="absolute bottom-28 left-4 md:bottom-36 md:left-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-blue-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center text-blue-300">
                   <Scissors size={20} />
                 </div>
@@ -284,16 +187,10 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">Barber & Aesthetics</div>
                   <div className="text-[9px] text-blue-300">Agendamentos VIP</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* 4. Médico Badge (Bottom Right) */}
-              <motion.div
-                animate={{ y: [-8, 8, -8] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "bottom-32 right-3 opacity-30" : "bottom-36 right-[12%] opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl shadow-2xl`}
-              >
+              {/* 4. Médico Badge */}
+              <div className="absolute bottom-28 right-4 md:bottom-36 md:right-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300">
                   <Stethoscope size={20} />
                 </div>
@@ -301,14 +198,10 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">Clínica & Saúde</div>
                   <div className="text-[9px] text-emerald-300">Pacientes & Autoridade</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* Bottom Center Micro Element: Google 5 Stars & SSL */}
-              <motion.div
-                animate={{ y: [-4, 4, -4] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute bottom-20 flex items-center gap-4 bg-black/80 border border-white/15 px-4 py-1.5 rounded-full backdrop-blur-md"
-              >
+              {/* Bottom Center Micro Element */}
+              <div className="absolute bottom-20 flex items-center gap-4 bg-black/80 border border-white/15 px-4 py-1.5 rounded-full backdrop-blur-md">
                 <div className="flex items-center gap-1 text-yellow-400">
                   <Star size={12} fill="currentColor" />
                   <Star size={12} fill="currentColor" />
@@ -321,41 +214,22 @@ export function Hero() {
                 <div className="text-[10px] text-green-400 font-mono flex items-center gap-1">
                   <Lock size={10} /> Dominio & SSL
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           )}
 
-          {/* CENA 3: REDE NEURAL & 1 SINGLE CRM CARD (+AUTOMAÇÃO WHATSAPP, WEBHOOKS, SUPABASE, FATURAMENTO) */}
+          {/* CENA 3: CRMs & SISTEMAS */}
           {scene === 2 && (
             <motion.div
               key="scene-2"
-              initial={{ opacity: 0, scale: 0.85 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.15 }}
-              transition={{ duration: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.6 }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              {/* Neural Data Network Lines */}
-              <svg className="absolute w-full h-full opacity-30" preserveAspectRatio="none" viewBox="0 0 1200 800">
-                <motion.path
-                  d="M 100 200 Q 300 50, 600 400 T 1100 600"
-                  fill="none"
-                  stroke="#10B981"
-                  strokeWidth="2"
-                  strokeDasharray="6 6"
-                  animate={{ strokeDashoffset: [0, -100] }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                />
-              </svg>
-
               {/* 1 SINGLE CRM CARD IN ENTIRE LOOP */}
-              <motion.div
-                animate={{ y: [-10, 10, -10] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "left-2 w-[190px] h-[290px] opacity-25" : "left-[8%] md:left-[11%] w-[330px] h-[430px] opacity-50"
-                } rounded-3xl border border-emerald-500/40 bg-black/90 backdrop-blur-xl p-5 flex flex-col justify-between shadow-[0_0_50px_rgba(16,185,129,0.25)]`}
-              >
+              <div className="absolute left-4 md:left-[11%] w-[260px] md:w-[320px] h-[340px] md:h-[400px] opacity-40 md:opacity-60 rounded-3xl border border-emerald-500/40 bg-black/90 backdrop-blur-xl p-5 flex flex-col justify-between shadow-2xl">
                 <div className="flex justify-between items-center border-b border-white/10 pb-3">
                   <span className="font-mono text-[9px] text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded border border-emerald-500/30 flex items-center gap-1">
                     <BarChart3 size={10} /> CRM DE LEADS
@@ -383,16 +257,10 @@ export function Hero() {
                   <span>AUTOMAÇÃO DE LEADS</span>
                   <span>SUPABASE SYNC</span>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Data Sync Node Pill Right Top */}
-              <motion.div
-                animate={{ scale: [1.05, 0.95, 1.05] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "right-3 top-36 opacity-30" : "right-[10%] top-40 opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-teal-500/40 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(20,184,166,0.25)]`}
-              >
+              <div className="absolute right-4 top-36 md:right-[10%] md:top-40 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-teal-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center text-teal-300">
                   <Activity size={20} />
                 </div>
@@ -400,16 +268,10 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">+1.480 Leads No Funil</div>
                   <div className="text-[9px] text-teal-300">Dashboard em Tempo Real</div>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Data Sync Node Pill Right Bottom */}
-              <motion.div
-                animate={{ y: [8, -8, 8] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "right-3 bottom-32 opacity-30" : "right-[10%] bottom-36 opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(16,185,129,0.25)]`}
-              >
+              <div className="absolute right-4 bottom-28 md:right-[10%] md:bottom-36 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">
                   <MessageSquareText size={20} />
                 </div>
@@ -417,40 +279,30 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">Automação WhatsApp</div>
                   <div className="text-[9px] text-emerald-300">Disparo & Webhooks API</div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           )}
 
-          {/* CENA 4: REATOR QUANTUM & VELOCIDADE 100/100 (+CLEAN CODE, FCP 0.3s, LCP 0.6s, VITE + REACT) */}
+          {/* CENA 4: REATOR QUANTUM & VELOCIDADE 100/100 */}
           {scene === 3 && (
             <motion.div
               key="scene-3"
-              initial={{ opacity: 0, scale: 0.85 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.15 }}
-              transition={{ duration: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.6 }}
               className="absolute inset-0 flex items-center justify-center pointer-events-none"
             >
-              {/* Quantum Speed Meter Core Ring */}
+              {/* Speed Core Ring */}
               <div className="relative flex items-center justify-center opacity-30">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                  className="w-[300px] h-[300px] sm:w-[480px] sm:h-[480px] rounded-full border-4 border-amber-500/30 border-t-amber-400 border-r-transparent"
-                />
+                <div className="w-[280px] h-[280px] sm:w-[440px] sm:h-[440px] rounded-full border-4 border-amber-500/30 border-t-amber-400 border-r-transparent animate-spin" style={{ animationDuration: "12s" }} />
                 <div className="absolute font-mono font-black text-6xl sm:text-8xl text-amber-400 tracking-tighter opacity-60">
                   100
                 </div>
               </div>
 
               {/* Quantum Speed Pill Left Top */}
-              <motion.div
-                animate={{ y: [-6, 6, -6] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "left-3 top-36 opacity-30" : "left-[10%] top-40 opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-amber-500/40 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(245,158,11,0.25)]`}
-              >
+              <div className="absolute left-4 top-36 md:left-[10%] md:top-40 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-amber-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400">
                   <Cpu size={20} />
                 </div>
@@ -458,16 +310,10 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">Google PageSpeed</div>
                   <div className="text-[9px] text-amber-300">Nota 100/100 Absoluta</div>
                 </div>
-              </motion.div>
+              </div>
 
-              {/* Quantum Speed Pill Left Bottom (FCP/LCP metrics) */}
-              <motion.div
-                animate={{ y: [6, -6, 6] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "left-3 bottom-32 opacity-30" : "left-[10%] bottom-36 opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(16,185,129,0.25)]`}
-              >
+              {/* Quantum Speed Pill Left Bottom */}
+              <div className="absolute left-4 bottom-28 md:left-[10%] md:bottom-36 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">
                   <ShieldCheck size={20} />
                 </div>
@@ -475,16 +321,10 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">FCP: 0.3s | LCP: 0.6s</div>
                   <div className="text-[9px] text-emerald-300">SEO & Core Web Vitals</div>
                 </div>
-              </motion.div>
+              </div>
 
               {/* Code Engineering Pill Right */}
-              <motion.div
-                animate={{ y: [6, -6, 6] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                className={`absolute ${
-                  isMobile ? "right-3 bottom-36 opacity-30" : "right-[10%] bottom-40 opacity-70"
-                } flex items-center gap-3 px-4 py-3 bg-black/80 border border-orange-500/40 rounded-2xl backdrop-blur-xl shadow-[0_0_30px_rgba(249,115,22,0.25)]`}
-              >
+              <div className="absolute right-4 bottom-28 md:right-[10%] md:bottom-40 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-orange-500/40 rounded-2xl backdrop-blur-xl">
                 <div className="w-10 h-10 rounded-xl bg-orange-500/20 border border-orange-400/40 flex items-center justify-center text-orange-400">
                   <Terminal size={20} />
                 </div>
@@ -492,19 +332,20 @@ export function Hero() {
                   <div className="text-xs font-bold text-white">Clean Code & Vite</div>
                   <div className="text-[9px] text-orange-300">0.2s Ultra Fast Render</div>
                 </div>
-              </motion.div>
+              </div>
             </motion.div>
           )}
 
         </AnimatePresence>
 
-        {/* Scene Navigation Selector Bullets at Bottom of Background */}
+        {/* Scene Navigation Selector Bullets */}
         <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
           {scenesMeta.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setScene(idx)}
-              className={`h-1.5 rounded-full transition-all duration-500 ${
+              aria-label={`Alternar para cena ${idx + 1}`}
+              className={`h-2 rounded-full transition-all duration-500 min-w-[24px] min-h-[24px] flex items-center justify-center ${
                 scene === idx ? "w-8 bg-white" : "w-2 bg-white/20 hover:bg-white/40"
               }`}
             />
@@ -513,61 +354,44 @@ export function Hero() {
 
       </div>
 
-      {/* ORIGINAL HERO FRONT CONTENT (Mantido exatamente como no original) */}
+      {/* ORIGINAL HERO FRONT CONTENT */}
       <div className="relative z-10 flex flex-col items-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+        <h1
           className="text-5xl md:text-[6.5rem] font-bold tracking-tighter uppercase leading-[0.9] text-white flex flex-col items-center font-['Orbitron']"
-          style={{ textShadow: "0 0 40px rgba(255,255,255,0.3)" }}
+          style={{ textShadow: "0 0 30px rgba(255,255,255,0.2)" }}
         >
           <span className="tracking-[0.1em] font-black">Lkz</span>
-          <span className="text-2xl md:text-5xl tracking-[0.2em] font-medium lowercase mt-2 font-sans">studio</span>
-        </motion.h1>
+          <span className="text-2xl md:text-5xl tracking-[0.2em] font-medium lowercase mt-2 font-sans text-purple-400">studio</span>
+        </h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="mt-12 flex flex-col items-center"
-        >
-          <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase text-zinc-400 mb-2 whitespace-pre-line text-center">
+        <div className="mt-10 flex flex-col items-center">
+          <p className="font-mono text-[10px] md:text-xs tracking-[0.25em] uppercase text-zinc-300 mb-2 whitespace-pre-line text-center">
             {`SITES DE ALTA CONVERSÃO - PERFORMANCE - UX\nTRANSFORMANDO TRÁFEGO EM AUTORIDADE E FATURAMENTO !`}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1 }}
-          className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
-        >
+        <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <a
             href="#contato"
-            className="w-full sm:w-48 h-14 flex justify-center items-center bg-white text-black font-bold text-sm uppercase tracking-widest hover:bg-zinc-200 transition-colors relative overflow-hidden group"
+            aria-label="Escalar seu negócio com LKZ Studio"
+            className="w-full sm:w-48 h-14 flex justify-center items-center bg-white text-black font-bold text-sm uppercase tracking-widest hover:bg-zinc-200 transition-colors rounded-xl min-h-[44px]"
           >
-            <span className="absolute inset-0 w-full h-full bg-white/20 blur-md group-hover:scale-150 transition-transform duration-500" />
             ESCALAR
           </a>
           <a
             href="#projetos"
-            className="w-full sm:w-48 h-14 flex justify-center items-center border border-white/30 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/10 transition-colors"
+            aria-label="Ver cases de sucesso do portfólio"
+            className="w-full sm:w-48 h-14 flex justify-center items-center border border-white/30 text-white font-bold text-sm uppercase tracking-widest hover:bg-white/10 transition-colors rounded-xl min-h-[44px]"
           >
             VER CASES
           </a>
-        </motion.div>
+        </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
-        className="absolute bottom-8 flex flex-col items-center gap-3 z-10"
-      >
-        <div className="w-[1px] h-10 bg-gradient-to-b from-transparent via-white/60 to-white/40 animate-pulse" />
+      <div className="absolute bottom-8 flex flex-col items-center gap-3 z-10">
+        <div className="w-[1px] h-8 bg-gradient-to-b from-transparent via-white/60 to-white/40 animate-pulse" />
         <span className="font-mono text-[9px] tracking-widest uppercase opacity-60">Scroll para explorar</span>
-      </motion.div>
+      </div>
     </section>
   );
 }

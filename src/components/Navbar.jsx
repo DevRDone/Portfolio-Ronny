@@ -10,7 +10,7 @@ export function Navbar() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -24,19 +24,19 @@ export function Navbar() {
 
   return (
     <>
-      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "py-4 bg-background/80 backdrop-blur-md border-b border-white/5" : "py-8"}`}>
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? "py-4 bg-zinc-950/90 backdrop-blur-md border-b border-white/10" : "py-6"}`}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12 flex items-center justify-between">
-          <a href="#" className="font-['Orbitron'] font-bold text-xl md:text-2xl tracking-widest flex flex-col items-start leading-[1] text-white">
+          <a href="#" aria-label="LKZ Studio - Página inicial" className="font-['Orbitron'] font-bold text-xl md:text-2xl tracking-widest flex flex-col items-start leading-[1] text-white">
             <span className="tracking-[0.1em]">LKZ</span>
-            <span className="text-[10px] font-sans font-light tracking-[0.2em] lowercase">studio</span>
+            <span className="text-[10px] font-sans font-light tracking-[0.2em] lowercase text-purple-400">studio</span>
           </a>
 
-          <nav className="hidden md:flex items-center gap-10">
+          <nav className="hidden md:flex items-center gap-8" aria-label="Navegação principal">
             {links.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[10px] font-bold text-white uppercase tracking-[0.2em] hover:opacity-70 transition-opacity"
+                className="text-xs font-bold text-zinc-300 uppercase tracking-[0.2em] hover:text-white transition-colors py-2"
               >
                 {link.name}
               </a>
@@ -44,13 +44,17 @@ export function Navbar() {
           </nav>
 
           <div className="hidden md:block">
-            <a href="#contato" className="bg-white text-black px-8 py-3 text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-colors">
+            <a href="#contato" className="bg-white text-black px-6 py-3 text-xs font-bold uppercase tracking-[0.2em] hover:bg-zinc-200 transition-colors min-h-[44px] inline-flex items-center rounded-lg">
               INICIAR PROJETO
             </a>
           </div>
 
-          <button className="md:hidden p-2 text-white" onClick={() => setMobileMenuOpen(true)}>
-            <Menu size={24} />
+          <button 
+            className="md:hidden p-3 text-white border border-white/10 rounded-xl bg-white/5 min-w-[44px] min-h-[44px] flex items-center justify-center" 
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Abrir menu de navegação"
+          >
+            <Menu size={22} />
           </button>
         </div>
       </header>
@@ -62,21 +66,22 @@ export function Navbar() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-[60] bg-background flex flex-col items-center justify-center p-6"
+            className="fixed inset-0 z-[60] bg-zinc-950/98 backdrop-blur-xl flex flex-col items-center justify-center p-6"
           >
             <button
-              className="absolute top-8 right-8 p-2 text-white"
+              className="absolute top-6 right-6 p-3 text-white border border-white/10 rounded-xl bg-white/5 min-w-[44px] min-h-[44px] flex items-center justify-center"
               onClick={() => setMobileMenuOpen(false)}
+              aria-label="Fechar menu de navegação"
             >
-              <X size={32} />
+              <X size={28} />
             </button>
-            <nav className="flex flex-col items-center gap-10">
+            <nav className="flex flex-col items-center gap-8" aria-label="Navegação móvel">
               {links.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-lg font-bold text-white uppercase tracking-[0.2em]"
+                  className="text-lg font-bold text-white uppercase tracking-[0.2em] py-2 min-h-[44px] flex items-center"
                 >
                   {link.name}
                 </a>
@@ -84,7 +89,7 @@ export function Navbar() {
               <a
                 href="#contato"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-8 bg-white text-black px-10 py-5 text-sm font-bold uppercase tracking-[0.2em]"
+                className="mt-6 bg-white text-black px-8 py-4 text-xs font-bold uppercase tracking-[0.2em] rounded-xl min-h-[44px] flex items-center"
               >
                 INICIAR PROJETO
               </a>

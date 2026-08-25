@@ -30,17 +30,17 @@ const steps = [
 
 export function Process() {
   return (
-    <section id="processo" className="py-32 px-6 max-w-5xl mx-auto relative">
+    <section id="processo" className="py-32 px-6 max-w-5xl mx-auto relative bg-zinc-950">
       <div className="text-center mb-20">
-        <span className="font-mono text-xs uppercase tracking-widest text-zinc-500 mb-4 block">Como Funciona</span>
-        <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">Processo de Criação</h2>
-        <p className="text-zinc-400 max-w-xl mx-auto">
+        <span className="font-mono text-xs uppercase tracking-widest text-purple-400 mb-4 block">Como Funciona</span>
+        <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 font-['Orbitron']">Processo de Criação</h2>
+        <p className="text-zinc-300 max-w-xl mx-auto">
           Do pagamento ao deploy final, cada etapa é pensada para garantir velocidade, sofisticação e alinhamento com a sua visão.
         </p>
       </div>
 
       <div className="relative">
-        <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-border" />
+        <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-white/10" />
         
         {steps.map((step, i) => (
           <motion.div
@@ -48,18 +48,18 @@ export function Process() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: i * 0.1 }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
             className={`relative flex items-center gap-8 md:gap-16 mb-16 last:mb-0 md:flex-row ${i % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
           >
             <div className={`flex-1 pl-16 md:pl-0 ${i % 2 === 1 ? 'md:text-left text-left' : 'md:text-right text-left'}`}>
-              <div className="font-mono text-xs text-zinc-500 mb-2">{step.num}</div>
-              <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-3">{step.title}</h3>
-              <p className={`text-zinc-400 text-sm md:text-base max-w-sm ${i % 2 === 1 ? 'mr-auto' : 'ml-auto'}`}>
+              <div className="font-mono text-xs text-purple-400 mb-2 font-bold">{step.num}</div>
+              <h3 className="text-2xl md:text-3xl font-bold tracking-tight mb-3 text-white font-['Orbitron']">{step.title}</h3>
+              <p className={`text-zinc-300 text-sm md:text-base max-w-sm ${i % 2 === 1 ? 'mr-auto' : 'ml-auto'}`}>
                 {step.desc}
               </p>
             </div>
             
-            <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-4 h-4 bg-white rounded-full z-10 ring-4 ring-background shadow-[0_0_15px_rgba(255,255,255,0.5)] -translate-x-[7px] md:-translate-x-1/2" />
+            <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-4 h-4 bg-white rounded-full z-10 ring-4 ring-zinc-950 shadow-md -translate-x-[7px] md:-translate-x-1/2" />
             
             <div className="hidden md:block flex-1" />
           </motion.div>
