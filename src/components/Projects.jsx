@@ -169,6 +169,7 @@ export function Projects() {
                     alt={`Capa do projeto ${project.title}`}
                     loading="lazy"
                     decoding="async"
+                    sizes="(max-width: 768px) 100vw, 60vw"
                     width="1200"
                     height="750"
                     className={`w-full h-full rounded-xl group-hover:scale-[1.02] transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] ${project.objectFit}`}
@@ -177,7 +178,7 @@ export function Projects() {
                   {hasLink && (
                     <div 
                       className="absolute top-4 right-4 z-20 w-12 h-12 bg-black/70 backdrop-blur-md border border-[#7C3AED]/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 shadow-lg"
-                      aria-label={`Ver projeto ${project.title}`}
+                      aria-hidden="true"
                     >
                       <ArrowUpRight className="text-[#7C3AED]" size={22} />
                     </div>

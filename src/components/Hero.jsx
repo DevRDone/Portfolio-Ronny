@@ -349,7 +349,7 @@ export function Hero() {
 
         {/* RESTORED EXACT COPY AND FONT */}
         <div className="mt-10 flex flex-col items-center">
-          <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase text-zinc-400 mb-2 whitespace-pre-line text-center">
+          <p className="font-mono text-[10px] md:text-xs tracking-[0.3em] uppercase text-zinc-300 mb-2 whitespace-pre-line text-center">
             {`SITES DE ALTA CONVERSÃO - PERFORMANCE - UX\nTRANSFORMANDO TRÁFEGO EM AUTORIDADE E FATURAMENTO !`}
           </p>
         </div>

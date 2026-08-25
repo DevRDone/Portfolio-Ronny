@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, lazy, Suspense } from 'react'
 import Lenis from 'lenis'
 import { BackgroundMeshGlow } from './components/BackgroundMeshGlow'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
-import { Projects } from './components/Projects'
-import { Services } from './components/Services'
-import { Process } from './components/Process'
-import { Pricing } from './components/Pricing'
-import { Footer } from './components/Footer'
+
+// Code splitting for below-the-fold components to reduce initial JS payload
+const Projects = lazy(() => import('./components/Projects').then(m => ({ default: m.Projects })))
+const Services = lazy(() => import('./components/Services').then(m => ({ default: m.Services })))
+const Process = lazy(() => import('./components/Process').then(m => ({ default: m.Process })))
+const Pricing = lazy(() => import('./components/Pricing').then(m => ({ default: m.Pricing })))
+const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })))
 
 function App() {
   useEffect(() => {
@@ -38,13 +40,17 @@ function App() {
       
       <main>
         <Hero />
-        <Projects />
-        <Services />
-        <Process />
-        <Pricing />
+        <Suspense fallback={<div className="min-h-[400px]" />}>
+          <Projects />
+          <Services />
+          <Process />
+          <Pricing />
+        </Suspense>
       </main>
       
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
     </div>
   )
 }

@@ -10,9 +10,12 @@ export function KovaIcon({ className = "w-8 h-8", glow = true, useImg = true }) 
         <img 
           src={kovaLogoImg} 
           alt="Kova Labs Logo" 
-          className="w-full h-full object-contain relative z-10 drop-shadow-[0_0_15px_rgba(124,58,237,0.5)]"
+          width="201"
+          height="235"
+          fetchPriority="high"
           loading="eager"
           decoding="async"
+          className="w-full h-full object-contain relative z-10 drop-shadow-[0_0_15px_rgba(124,58,237,0.5)]"
         />
       </div>
     );
@@ -27,6 +30,7 @@ export function KovaIcon({ className = "w-8 h-8", glow = true, useImg = true }) 
         viewBox="0 0 100 100"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
         className="w-full h-full relative z-10 drop-shadow-[0_0_12px_rgba(124,58,237,0.6)]"
       >
         <path
