@@ -23,20 +23,31 @@ import { KovaIcon } from "./KovaLogo";
 
 export function Hero() {
   const [scene, setScene] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // "Video Loop" automático trocando de cena a cada 6 segundos
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // "Video Loop" automático trocando de cena a cada 6 segundos (desativado ou leve em mobile)
+  useEffect(() => {
+    if (isMobile) return; // Não rodar timer de animação pesada no mobile para economizar TBT
     const interval = setInterval(() => {
       setScene((prev) => (prev + 1) % 4);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isMobile]);
 
   const scenesMeta = [
-    { glow: "from-[#7C3AED]/40 via-indigo-600/30 to-[#EF233C]/30" },
-    { glow: "from-purple-600/30 via-[#7C3AED]/30 to-blue-600/30" },
-    { glow: "from-emerald-600/30 via-teal-600/20 to-[#7C3AED]/30" },
-    { glow: "from-[#EF233C]/40 via-orange-600/30 to-[#7C3AED]/40" }
+    { glow: "from-[#7C3AED]/30 via-indigo-600/20 to-[#EF233C]/20" },
+    { glow: "from-purple-600/20 via-[#7C3AED]/20 to-blue-600/20" },
+    { glow: "from-emerald-600/20 via-teal-600/15 to-[#7C3AED]/20" },
+    { glow: "from-[#EF233C]/30 via-orange-600/20 to-[#7C3AED]/30" }
   ];
 
   return (
@@ -48,310 +59,306 @@ export function Hero() {
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
         
         {/* Dynamic Background Aura Glow in Kova Violet & Red */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`glow-${scene}`}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 0.45, scale: 1.15 }}
-            exit={{ opacity: 0, scale: 1.25 }}
-            transition={{ duration: 1.2 }}
-            className={`absolute w-[600px] h-[600px] md:w-[850px] md:h-[850px] rounded-full bg-gradient-to-tr ${scenesMeta[scene].glow} blur-[140px] will-change-transform`}
-          />
-        </AnimatePresence>
+        <div
+          className={`absolute w-[400px] h-[400px] md:w-[850px] md:h-[850px] rounded-full bg-gradient-to-tr ${scenesMeta[scene].glow} blur-[80px] md:blur-[140px] transition-all duration-1000 will-change-transform`}
+        />
 
         {/* Cybernetic Matrix Grid */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#050507]/85 to-[#050507] z-0" />
         <div className="absolute inset-0 opacity-15 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
 
-        {/* SCENE ENRICHED MOTIONS */}
-        <AnimatePresence mode="wait">
-          
-          {/* CENA 1: LANDING PAGES / PÁGINAS DE VENDAS */}
-          {scene === 0 && (
-            <motion.div
-              key="scene-0"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            >
-              {/* Radar Waves */}
-              {[0, 1, 2].map((ring) => (
-                <div
-                  key={`radar-${ring}`}
-                  className="absolute w-[300px] h-[300px] sm:w-[460px] sm:h-[460px] border border-[#7C3AED]/30 rounded-full animate-ping"
-                  style={{ animationDuration: `${3 + ring * 1.5}s` }}
-                />
-              ))}
+        {/* SCENE ENRICHED MOTIONS - Apenas em telas maiores (MD+) para economizar 100% do TBT no mobile */}
+        {!isMobile && (
+          <AnimatePresence mode="wait">
+            
+            {/* CENA 1: LANDING PAGES / PÁGINAS DE VENDAS */}
+            {scene === 0 && (
+              <motion.div
+                key="scene-0"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                {/* Radar Waves */}
+                {[0, 1].map((ring) => (
+                  <div
+                    key={`radar-${ring}`}
+                    className="absolute w-[340px] h-[340px] md:w-[460px] md:h-[460px] border border-[#7C3AED]/20 rounded-full"
+                  />
+                ))}
 
-              {/* 1. Elemento: +ROI Elevado */}
-              <div className="absolute top-28 left-4 md:top-36 md:left-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-[#7C3AED]/40 rounded-full backdrop-blur-xl">
-                <div className="w-8 h-8 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center text-green-400">
-                  <TrendingUp size={16} />
-                </div>
-                <div className="text-left font-mono">
-                  <div className="text-[10px] text-zinc-400">Retorno de Investimento</div>
-                  <div className="text-xs font-bold text-green-400">+ROI Elevado (ADS)</div>
-                </div>
-              </div>
-
-              {/* 2. Elemento: Vendas 24/7 */}
-              <div className="absolute top-28 right-4 md:top-36 md:right-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-[#EF233C]/40 rounded-full backdrop-blur-xl">
-                <div className="w-8 h-8 rounded-full bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
-                  <Clock size={16} />
-                </div>
-                <div className="text-left font-mono">
-                  <div className="text-[10px] text-zinc-400">Funil Automático</div>
-                  <div className="text-xs font-bold text-white">Vendas 24H Por Dia</div>
-                </div>
-              </div>
-
-              {/* 3. Elemento: Meta & Google Ads */}
-              <div className="absolute bottom-28 left-4 md:bottom-36 md:left-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-[#7C3AED]/40 rounded-full backdrop-blur-xl">
-                <div className="w-8 h-8 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-[#7C3AED]">
-                  <Target size={16} />
-                </div>
-                <div className="text-left font-mono">
-                  <div className="text-[10px] text-zinc-400">Pixel & Tracking Active</div>
-                  <div className="text-xs font-bold text-purple-300">Google & Meta Ads</div>
-                </div>
-              </div>
-
-              {/* 4. Elemento: Direct Checkout */}
-              <div className="absolute bottom-28 right-4 md:bottom-36 md:right-[10%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-2.5 bg-black/80 border border-emerald-500/40 rounded-full backdrop-blur-xl">
-                <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
-                  <DollarSign size={16} />
-                </div>
-                <div className="text-left font-mono">
-                  <div className="text-[10px] text-zinc-400">Alta Conversão</div>
-                  <div className="text-xs font-bold text-green-400">R$ 497,00 Checkout Direct</div>
-                </div>
-              </div>
-
-              {/* Center Micro Floating Badge */}
-              <div className="absolute top-20 font-mono text-[10px] text-purple-300 bg-[#7C3AED]/15 border border-[#7C3AED]/40 px-3 py-1 rounded-full backdrop-blur-md">
-                ⚡ COPYWRITING MAGNÉTICO & AIDA
-              </div>
-            </motion.div>
-          )}
-
-          {/* CENA 2: SITES INSTITUCIONAIS */}
-          {scene === 1 && (
-            <motion.div
-              key="scene-1"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            >
-              {/* Google Search Bar Mockup Top Center */}
-              <div className="absolute top-16 sm:top-20 w-[300px] sm:w-[500px] bg-black/90 border border-white/20 rounded-full px-4 py-2.5 flex items-center gap-3 backdrop-blur-xl opacity-60 shadow-xl">
-                <Search size={14} className="text-[#7C3AED]" />
-                <span className="font-mono text-xs text-zinc-300 flex-1 text-left truncate">
-                  Advogados, Personal Trainers, Barbeiros & Médicos no Google...
-                </span>
-                <span className="font-mono text-[9px] bg-[#7C3AED]/20 text-purple-300 px-2 py-0.5 rounded-full border border-[#7C3AED]/40">
-                  TOP #1
-                </span>
-              </div>
-
-              {/* 1. Advogado Badge */}
-              <div className="absolute top-28 left-4 md:top-36 md:left-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-[#7C3AED]/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-purple-300">
-                  <Scale size={20} />
-                </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">Advocacia & Direito</div>
-                  <div className="text-[9px] text-purple-300">Prestígio & Contratos</div>
-                </div>
-              </div>
-
-              {/* 2. Personal Trainer Badge */}
-              <div className="absolute top-28 right-4 md:top-36 md:right-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-[#EF233C]/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
-                  <Dumbbell size={20} />
-                </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">Personal Trainer</div>
-                  <div className="text-[9px] text-[#EF233C]">Consultoria Online</div>
-                </div>
-              </div>
-
-              {/* 3. Barbeiro Badge */}
-              <div className="absolute bottom-28 left-4 md:bottom-36 md:left-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-blue-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center text-blue-300">
-                  <Scissors size={20} />
-                </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">Barber & Aesthetics</div>
-                  <div className="text-[9px] text-blue-300">Agendamentos VIP</div>
-                </div>
-              </div>
-
-              {/* 4. Médico Badge */}
-              <div className="absolute bottom-28 right-4 md:bottom-36 md:right-[12%] opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300">
-                  <Stethoscope size={20} />
-                </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">Clínica & Saúde</div>
-                  <div className="text-[9px] text-emerald-300">Pacientes & Autoridade</div>
-                </div>
-              </div>
-
-              {/* Bottom Center Micro Element */}
-              <div className="absolute bottom-20 flex items-center gap-4 bg-black/80 border border-white/15 px-4 py-1.5 rounded-full backdrop-blur-md">
-                <div className="flex items-center gap-1 text-yellow-400">
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <Star size={12} fill="currentColor" />
-                  <span className="text-[10px] text-zinc-300 font-mono ml-1">5.0 Google Reviews</span>
-                </div>
-                <span className="text-zinc-600">|</span>
-                <div className="text-[10px] text-green-400 font-mono flex items-center gap-1">
-                  <Lock size={10} /> Dominio & SSL
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* CENA 3: CRMs & SISTEMAS */}
-          {scene === 2 && (
-            <motion.div
-              key="scene-2"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            >
-              {/* 1 SINGLE CRM CARD */}
-              <div className="absolute left-4 md:left-[11%] w-[260px] md:w-[320px] h-[340px] md:h-[400px] opacity-40 md:opacity-60 rounded-3xl border border-[#7C3AED]/40 bg-black/90 backdrop-blur-xl p-5 flex flex-col justify-between shadow-2xl">
-                <div className="flex justify-between items-center border-b border-white/10 pb-3">
-                  <span className="font-mono text-[9px] text-purple-300 bg-[#7C3AED]/20 px-2 py-0.5 rounded border border-[#7C3AED]/40 flex items-center gap-1">
-                    <BarChart3 size={10} /> KOVA CRM SYSTEMS
-                  </span>
-                  <span className="text-[9px] font-mono text-emerald-400 font-bold">100% ONLINE</span>
-                </div>
-                <div className="space-y-3 text-left">
-                  <div className="text-xs font-bold text-white font-mono">Pipeline de Vendas</div>
-                  <div className="space-y-2">
-                    <div className="p-2 bg-white/5 border border-white/15 rounded flex items-center justify-between">
-                      <div className="text-[10px] text-zinc-300 font-mono">Clinica Médica</div>
-                      <span className="text-[8px] bg-blue-500/20 text-blue-300 px-1 py-0.5 rounded">Novo</span>
-                    </div>
-                    <div className="p-2 bg-white/5 border border-white/15 rounded flex items-center justify-between">
-                      <div className="text-[10px] text-zinc-300 font-mono">Advocacia</div>
-                      <span className="text-[8px] bg-yellow-500/20 text-yellow-300 px-1 py-0.5 rounded">Proposta</span>
-                    </div>
-                    <div className="p-2 bg-white/5 border border-white/15 rounded flex items-center justify-between">
-                      <div className="text-[10px] text-zinc-300 font-mono">Personal & Barber</div>
-                      <span className="text-[8px] bg-emerald-500/20 text-emerald-300 px-1 py-0.5 rounded">Fechado</span>
-                    </div>
+                {/* 1. Elemento: +ROI Elevado */}
+                <div className="absolute top-36 left-[10%] opacity-80 flex items-center gap-3 px-4 py-2.5 bg-[#0a0a0e]/90 border border-[#7C3AED]/40 rounded-full md:backdrop-blur-xl">
+                  <div className="w-8 h-8 rounded-full bg-green-500/20 border border-green-500/40 flex items-center justify-center text-green-400">
+                    <TrendingUp size={16} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-[10px] text-zinc-400">Retorno de Investimento</div>
+                    <div className="text-xs font-bold text-green-400">+ROI Elevado (ADS)</div>
                   </div>
                 </div>
-                <div className="text-[9px] font-mono text-purple-300 text-left border-t border-white/10 pt-2 flex justify-between">
-                  <span>AUTOMAÇÃO DE LEADS</span>
-                  <span>SUPABASE SYNC</span>
-                </div>
-              </div>
 
-              {/* Data Sync Node Pill Right Top */}
-              <div className="absolute right-4 top-36 md:right-[10%] md:top-40 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-teal-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center text-teal-300">
-                  <Activity size={20} />
+                {/* 2. Elemento: Vendas 24/7 */}
+                <div className="absolute top-36 right-[10%] opacity-80 flex items-center gap-3 px-4 py-2.5 bg-[#0a0a0e]/90 border border-[#EF233C]/40 rounded-full md:backdrop-blur-xl">
+                  <div className="w-8 h-8 rounded-full bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
+                    <Clock size={16} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-[10px] text-zinc-400">Funil Automático</div>
+                    <div className="text-xs font-bold text-white">Vendas 24H Por Dia</div>
+                  </div>
                 </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">+1.480 Leads No Funil</div>
-                  <div className="text-[9px] text-teal-300">Dashboard em Tempo Real</div>
-                </div>
-              </div>
 
-              {/* Data Sync Node Pill Right Bottom */}
-              <div className="absolute right-4 bottom-28 md:right-[10%] md:bottom-36 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-[#7C3AED]/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-purple-300">
-                  <MessageSquareText size={20} />
+                {/* 3. Elemento: Meta & Google Ads */}
+                <div className="absolute bottom-36 left-[10%] opacity-80 flex items-center gap-3 px-4 py-2.5 bg-[#0a0a0e]/90 border border-[#7C3AED]/40 rounded-full md:backdrop-blur-xl">
+                  <div className="w-8 h-8 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-[#7C3AED]">
+                    <Target size={16} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-[10px] text-zinc-400">Pixel & Tracking Active</div>
+                    <div className="text-xs font-bold text-purple-300">Google & Meta Ads</div>
+                  </div>
                 </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">Automação WhatsApp</div>
-                  <div className="text-[9px] text-purple-300">Disparo & Webhooks API</div>
-                </div>
-              </div>
-            </motion.div>
-          )}
 
-          {/* CENA 4: REATOR QUANTUM & VELOCIDADE 100/100 */}
-          {scene === 3 && (
-            <motion.div
-              key="scene-3"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 0.6 }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            >
-              {/* Speed Core Ring */}
-              <div className="relative flex items-center justify-center opacity-30">
-                <div className="w-[280px] h-[280px] sm:w-[440px] sm:h-[440px] rounded-full border-4 border-[#7C3AED]/30 border-t-[#7C3AED] border-r-transparent animate-spin" style={{ animationDuration: "12s" }} />
-                <div className="absolute font-mono font-black text-6xl sm:text-8xl text-purple-400 tracking-tighter opacity-60">
-                  100
+                {/* 4. Elemento: Direct Checkout */}
+                <div className="absolute bottom-36 right-[10%] opacity-80 flex items-center gap-3 px-4 py-2.5 bg-[#0a0a0e]/90 border border-emerald-500/40 rounded-full md:backdrop-blur-xl">
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                    <DollarSign size={16} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-[10px] text-zinc-400">Alta Conversão</div>
+                    <div className="text-xs font-bold text-green-400">R$ 497,00 Checkout Direct</div>
+                  </div>
                 </div>
-              </div>
 
-              {/* Quantum Speed Pill Left Top */}
-              <div className="absolute left-4 top-36 md:left-[10%] md:top-40 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-amber-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400">
-                  <Cpu size={20} />
+                {/* Center Micro Floating Badge */}
+                <div className="absolute top-20 font-mono text-[10px] text-purple-300 bg-[#7C3AED]/15 border border-[#7C3AED]/40 px-3 py-1 rounded-full md:backdrop-blur-md">
+                  ⚡ COPYWRITING MAGNÉTICO & AIDA
                 </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">Google PageSpeed</div>
-                  <div className="text-[9px] text-amber-300">Nota 100/100 Absoluta</div>
-                </div>
-              </div>
+              </motion.div>
+            )}
 
-              {/* Quantum Speed Pill Left Bottom */}
-              <div className="absolute left-4 bottom-28 md:left-[10%] md:bottom-36 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-emerald-500/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">
-                  <ShieldCheck size={20} />
+            {/* CENA 2: SITES INSTITUCIONAIS */}
+            {scene === 1 && (
+              <motion.div
+                key="scene-1"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                {/* Google Search Bar Mockup Top Center */}
+                <div className="absolute top-20 w-[500px] bg-[#0a0a0e]/90 border border-white/20 rounded-full px-4 py-2.5 flex items-center gap-3 md:backdrop-blur-xl opacity-60 shadow-xl">
+                  <Search size={14} className="text-[#7C3AED]" />
+                  <span className="font-mono text-xs text-zinc-300 flex-1 text-left truncate">
+                    Advogados, Personal Trainers, Barbeiros & Médicos no Google...
+                  </span>
+                  <span className="font-mono text-[9px] bg-[#7C3AED]/20 text-purple-300 px-2 py-0.5 rounded-full border border-[#7C3AED]/40">
+                    TOP #1
+                  </span>
                 </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">FCP: 0.3s | LCP: 0.6s</div>
-                  <div className="text-[9px] text-emerald-300">SEO & Core Web Vitals</div>
-                </div>
-              </div>
 
-              {/* Code Engineering Pill Right */}
-              <div className="absolute right-4 bottom-28 md:right-[10%] md:bottom-40 opacity-40 md:opacity-80 flex items-center gap-3 px-4 py-3 bg-black/80 border border-[#EF233C]/40 rounded-2xl backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
-                  <Terminal size={20} />
+                {/* 1. Advogado Badge */}
+                <div className="absolute top-36 left-[12%] opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-[#7C3AED]/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-purple-300">
+                    <Scale size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">Advocacia & Direito</div>
+                    <div className="text-[9px] text-purple-300">Prestígio & Contratos</div>
+                  </div>
                 </div>
-                <div className="text-left font-mono">
-                  <div className="text-xs font-bold text-white">Clean Code & Vite</div>
-                  <div className="text-[9px] text-[#EF233C]">0.2s Ultra Fast Render</div>
+
+                {/* 2. Personal Trainer Badge */}
+                <div className="absolute top-36 right-[12%] opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-[#EF233C]/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
+                    <Dumbbell size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">Personal Trainer</div>
+                    <div className="text-[9px] text-[#EF233C]">Consultoria Online</div>
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          )}
 
-        </AnimatePresence>
+                {/* 3. Barbeiro Badge */}
+                <div className="absolute bottom-36 left-[12%] opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-blue-500/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-blue-500/20 border border-blue-400/40 flex items-center justify-center text-blue-300">
+                    <Scissors size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">Barber & Aesthetics</div>
+                    <div className="text-[9px] text-blue-300">Agendamentos VIP</div>
+                  </div>
+                </div>
 
-        {/* Scene Navigation Selector Bullets */}
-        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
-          {scenesMeta.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setScene(idx)}
-              aria-label={`Alternar para cena ${idx + 1}`}
-              className={`h-2 rounded-full transition-all duration-500 min-w-[24px] min-h-[24px] flex items-center justify-center ${
-                scene === idx ? "w-8 bg-[#7C3AED]" : "w-2 bg-white/20 hover:bg-white/40"
-              }`}
-            />
-          ))}
-        </div>
+                {/* 4. Médico Badge */}
+                <div className="absolute bottom-36 right-[12%] opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-emerald-500/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-300">
+                    <Stethoscope size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">Clínica & Saúde</div>
+                    <div className="text-[9px] text-emerald-300">Pacientes & Autoridade</div>
+                  </div>
+                </div>
+
+                {/* Bottom Center Micro Element */}
+                <div className="absolute bottom-20 flex items-center gap-4 bg-[#0a0a0e]/90 border border-white/15 px-4 py-1.5 rounded-full md:backdrop-blur-md">
+                  <div className="flex items-center gap-1 text-yellow-400">
+                    <Star size={12} fill="currentColor" />
+                    <Star size={12} fill="currentColor" />
+                    <Star size={12} fill="currentColor" />
+                    <Star size={12} fill="currentColor" />
+                    <Star size={12} fill="currentColor" />
+                    <span className="text-[10px] text-zinc-300 font-mono ml-1">5.0 Google Reviews</span>
+                  </div>
+                  <span className="text-zinc-600">|</span>
+                  <div className="text-[10px] text-green-400 font-mono flex items-center gap-1">
+                    <Lock size={10} /> Dominio & SSL
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* CENA 3: CRMs & SISTEMAS */}
+            {scene === 2 && (
+              <motion.div
+                key="scene-2"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                {/* 1 SINGLE CRM CARD */}
+                <div className="absolute left-[11%] w-[320px] h-[400px] opacity-60 rounded-3xl border border-[#7C3AED]/40 bg-[#0a0a0e]/95 md:backdrop-blur-xl p-5 flex flex-col justify-between shadow-2xl">
+                  <div className="flex justify-between items-center border-b border-white/10 pb-3">
+                    <span className="font-mono text-[9px] text-purple-300 bg-[#7C3AED]/20 px-2 py-0.5 rounded border border-[#7C3AED]/40 flex items-center gap-1">
+                      <BarChart3 size={10} /> KOVA CRM SYSTEMS
+                    </span>
+                    <span className="text-[9px] font-mono text-emerald-400 font-bold">100% ONLINE</span>
+                  </div>
+                  <div className="space-y-3 text-left">
+                    <div className="text-xs font-bold text-white font-mono">Pipeline de Vendas</div>
+                    <div className="space-y-2">
+                      <div className="p-2 bg-white/5 border border-white/15 rounded flex items-center justify-between">
+                        <div className="text-[10px] text-zinc-300 font-mono">Clinica Médica</div>
+                        <span className="text-[8px] bg-blue-500/20 text-blue-300 px-1 py-0.5 rounded">Novo</span>
+                      </div>
+                      <div className="p-2 bg-white/5 border border-white/15 rounded flex items-center justify-between">
+                        <div className="text-[10px] text-zinc-300 font-mono">Advocacia</div>
+                        <span className="text-[8px] bg-yellow-500/20 text-yellow-300 px-1 py-0.5 rounded">Proposta</span>
+                      </div>
+                      <div className="p-2 bg-white/5 border border-white/15 rounded flex items-center justify-between">
+                        <div className="text-[10px] text-zinc-300 font-mono">Personal & Barber</div>
+                        <span className="text-[8px] bg-emerald-500/20 text-emerald-300 px-1 py-0.5 rounded">Fechado</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="text-[9px] font-mono text-purple-300 text-left border-t border-white/10 pt-2 flex justify-between">
+                    <span>AUTOMAÇÃO DE LEADS</span>
+                    <span>SUPABASE SYNC</span>
+                  </div>
+                </div>
+
+                {/* Data Sync Node Pill Right Top */}
+                <div className="absolute right-[10%] top-40 opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-teal-500/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-teal-500/20 border border-teal-400/40 flex items-center justify-center text-teal-300">
+                    <Activity size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">+1.480 Leads No Funil</div>
+                    <div className="text-[9px] text-teal-300">Dashboard em Tempo Real</div>
+                  </div>
+                </div>
+
+                {/* Data Sync Node Pill Right Bottom */}
+                <div className="absolute right-[10%] bottom-36 opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-[#7C3AED]/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/20 border border-[#7C3AED]/40 flex items-center justify-center text-purple-300">
+                    <MessageSquareText size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">Automação WhatsApp</div>
+                    <div className="text-[9px] text-purple-300">Disparo & Webhooks API</div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* CENA 4: REATOR QUANTUM & VELOCIDADE 100/100 */}
+            {scene === 3 && (
+              <motion.div
+                key="scene-3"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0 flex items-center justify-center pointer-events-none"
+              >
+                {/* Speed Core Ring */}
+                <div className="relative flex items-center justify-center opacity-30">
+                  <div className="w-[440px] h-[440px] rounded-full border-4 border-[#7C3AED]/30 border-t-[#7C3AED] border-r-transparent" />
+                  <div className="absolute font-mono font-black text-8xl text-purple-400 tracking-tighter opacity-60">
+                    100
+                  </div>
+                </div>
+
+                {/* Quantum Speed Pill Left Top */}
+                <div className="absolute left-[10%] top-40 opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-amber-500/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400">
+                    <Cpu size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">Google PageSpeed</div>
+                    <div className="text-[9px] text-amber-300">Nota 100/100 Absoluta</div>
+                  </div>
+                </div>
+
+                {/* Quantum Speed Pill Left Bottom */}
+                <div className="absolute left-[10%] bottom-36 opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-emerald-500/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">FCP: 0.3s | LCP: 0.6s</div>
+                    <div className="text-[9px] text-emerald-300">SEO & Core Web Vitals</div>
+                  </div>
+                </div>
+
+                {/* Code Engineering Pill Right */}
+                <div className="absolute right-[10%] bottom-40 opacity-80 flex items-center gap-3 px-4 py-3 bg-[#0a0a0e]/90 border border-[#EF233C]/40 rounded-2xl md:backdrop-blur-xl">
+                  <div className="w-10 h-10 rounded-xl bg-[#EF233C]/20 border border-[#EF233C]/40 flex items-center justify-center text-[#EF233C]">
+                    <Terminal size={20} />
+                  </div>
+                  <div className="text-left font-mono">
+                    <div className="text-xs font-bold text-white">Clean Code & Vite</div>
+                    <div className="text-[9px] text-[#EF233C]">0.2s Ultra Fast Render</div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+          </AnimatePresence>
+        )}
+
+        {/* Scene Navigation Selector Bullets (Apenas no Desktop) */}
+        {!isMobile && (
+          <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+            {scenesMeta.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setScene(idx)}
+                aria-label={`Alternar para cena ${idx + 1}`}
+                className={`h-2 rounded-full transition-all duration-500 min-w-[24px] min-h-[24px] flex items-center justify-center ${
+                  scene === idx ? "w-8 bg-[#7C3AED]" : "w-2 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+        )}
 
       </div>
 
